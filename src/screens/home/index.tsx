@@ -20,22 +20,55 @@ interface Props {
 }
 
 const Home = (props: Props) => {
-  const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+  enum Order { location, vehicleType, services, ordered }
+  const [modalOpen, setModalOpen] = useState(false);
+  const [orderStatus, setOrderStatus] = useState(Order.location);
+  const [orderInfo, setOrderInfo] = useState({
+    id: '',
+    orderId: '',
+    vehicleType: '',
+    location: '',
+    services: '',
+  });
 
   useEffect(() => {
     checkPermissions();
-    console.log('Home UseEffect [] open', bottomSheetOpen);
+    console.log('Home UseEffect [] open', modalOpen);
   }, []);
 
   useEffect(() => {
-    console.log('Home UseEffect [bsheetopen] open', bottomSheetOpen);
-  }, [bottomSheetOpen]);
+    console.log('Home UseEffect [bsheetopen] open', modalOpen);
+  }, [modalOpen]);
+
+  useEffect(() => {
+    console.log('Order Status', orderStatus);
+  }, [orderStatus]);
+
+  useEffect(() => {
+    console.log('Order Info', orderInfo);
+  }, [orderInfo]);
 
 
   const onModalClosed = async (open: any) => {
-    await setBottomSheetOpen(open);
-    console.log('onmodalclosed done', bottomSheetOpen);
+    await setModalOpen(open);
+    console.log('onmodalclosed done', modalOpen);
   };
+
+  const changeOrderStatus = async (status: any) => {
+    await setOrderStatus(status);
+    if (orderStatus === Order.location) {
+      await setModalOpen(false);
+    }
+    console.log('ChangeOrderStatus', orderStatus);
+  };
+
+  const changeOrderInfo = async (info: any) => {
+    await setOrderInfo(info);
+    console.log('');
+    console.log('');
+    console.log('ChangeOrderInfo', orderInfo);
+  };
+
 
   const requestPermissions = async () => {
     requestLocationPermissions();
@@ -71,11 +104,11 @@ const Home = (props: Props) => {
   return (
     <>
       <SafeAreaView style={{ flex: 1 }}>
-        <Map navigation={props.navigation} bottomSheetOpen={bottomSheetOpen} />
-        <SearchBarHome navigation={props.navigation} />
+        <Map navigation={props.navigation} modalOpen={modalOpen} />
+        {orderStatus === Order.location ? <SearchBarHome navigation={props.navigation} /> : null}
         <View style={{
           position: 'absolute',
-          top: '15%',
+          top: '5%',
           alignSelf: 'center',
           height: '100%',
         }}>
@@ -85,12 +118,22 @@ const Home = (props: Props) => {
               backgroundColor: '#FB3640',
             }}
             onPress={() => {
-              setBottomSheetOpen(true);
-              console.log('pushed open modal button', bottomSheetOpen);
+              setModalOpen(true);
+              setOrderStatus(Order.vehicleType);
+              console.log('pushed open modal button', modalOpen);
             }}
           />
         </View>
-        <ModalBottom open={bottomSheetOpen} navigation={props.navigation} onModalClosed={onModalClosed} />
+        <ModalBottom
+          open={modalOpen}
+          navigation={props.navigation}
+          onModalClosed={onModalClosed}
+          orderStatus={orderStatus}
+          orderStatuses={Order}
+          changeOrderStatus={changeOrderStatus}
+          orderInfo={orderInfo}
+          changeOrderInfo={changeOrderInfo}
+        />
       </SafeAreaView>
     </>
   );

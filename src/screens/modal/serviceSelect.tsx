@@ -11,44 +11,48 @@ import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
   orderStatus: any;
+  changeOrderStatus: any;
   orderStatuses: any;
+  onModalClosed: any;
+  changeOrderInfo: any;
   orderInfo: any;
   navigation: NavigationScreenProp<NavigationStateRoute<any>>;
-  onModalClosed(open: boolean): any;
-  changeOrderStatus(orderStatus: any): any;
-  changeOrderInfo(orderInfo: any): any;
+
 }
 
-const VehicleSelect = (props: Props) => {
+const ServiceSelect = (props: Props) => {
 
   const modalButtons = [
     {
       id: '1',
-      title: 'Sedan',
+      title: 'Cambio de Llanta',
+      style: serviceSelectStyles.buttonLlanta,
       onPress: () => {
         props.changeOrderStatus(props.orderStatuses.services);
         let tempInfo = props.orderInfo;
-        tempInfo.vehicleType = 'Sedan';
+        tempInfo.services = 'Cambio de Llanta';
         props.changeOrderInfo(tempInfo);
       },
     },
     {
       id: '2',
-      title: '4x4',
+      title: 'Combustible',
+      style: serviceSelectStyles.buttonCombustible,
       onPress: () => {
         props.changeOrderStatus(props.orderStatuses.services);
         let tempInfo = props.orderInfo;
-        tempInfo.vehicleType = '4x4';
+        tempInfo.services = 'Combustible';
         props.changeOrderInfo(tempInfo);
       },
     },
     {
       id: '3',
-      title: 'Camioneta',
+      title: 'Pase de Corriente',
+      style: serviceSelectStyles.buttonCorriente,
       onPress: () => {
         props.changeOrderStatus(props.orderStatuses.services);
         let tempInfo = props.orderInfo;
-        tempInfo.vehicleType = 'Camioneta';
+        tempInfo.services = 'Pase de Corriente';
         props.changeOrderInfo(tempInfo);
       },
     },
@@ -60,13 +64,13 @@ const VehicleSelect = (props: Props) => {
         key={item.id}
         title={item.title}
         onPress={item.onPress}
-        buttonStyle={vehicleSelectStyles.button}
+        buttonStyle={item.style}
       />
     );
   };
 
   return (
-    <View style={vehicleSelectStyles.sectionContainerModal}>
+    <View style={serviceSelectStyles.sectionContainerModal}>
       <View
         style={{
           borderWidth: 0,
@@ -83,32 +87,34 @@ const VehicleSelect = (props: Props) => {
           raised={true}
           onPress={() => {
             let tempInfo = props.orderInfo;
-            tempInfo.vehicleType = '';
+            tempInfo.services = '';
             props.changeOrderInfo(tempInfo);
-            props.changeOrderStatus(props.orderStatuses.location);
-            props.onModalClosed(false);
+            props.changeOrderStatus(props.orderStatuses.vehicleType);
+            //props.onModalClosed(false);
           }}
         />
         <Text style={{ fontSize: 25, alignSelf: 'center', marginHorizontal: 10 }}>
-          Tipo de vehículo
+          Servicios
         </Text>
       </View>
       <SeparatorModal />
-      <View style={vehicleSelectStyles.flatlistContainerModal}>
+      <View style={serviceSelectStyles.flatlistContainerModal}>
         <FlatList
           data={modalButtons}
           ItemSeparatorComponent={SeparatorModal}
           keyExtractor={(item: any) => item.id}
           renderItem={({ item }: any) => _renderItem(item)}
           onEndReachedThreshold={0.5}
-          style={{ width: '100%' }}
+          style={{ width: '100%', alignSelf: 'center', margin: 5 }}
+          columnWrapperStyle={serviceSelectStyles.row}
+          numColumns={2}
         />
       </View>
     </View>
   );
 };
 
-const vehicleSelectStyles = StyleSheet.create({
+const serviceSelectStyles = StyleSheet.create({
   sectionContainerModal: {
     flexDirection: 'column',
     marginVertical: 10,
@@ -126,16 +132,32 @@ const vehicleSelectStyles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     marginHorizontal: 20,
-    width: '100%',
-    height: '100%',
+    width: '95%',
+    height: 100,
     //borderWidth: 3,
     borderColor: 'black',
   },
-  button: {
-    backgroundColor: '#FB3640',
-    width: '100%',
+  buttonLlanta: {
+    backgroundColor: '#80397B',
+    width: '85%',
     height: 80,
+  },
+  buttonCombustible: {
+    backgroundColor: '#D13438',
+    width: '85%',
+    height: 80,
+  },
+  buttonCorriente: {
+    backgroundColor: '#EADE2A',
+    width: '85%',
+    height: 80,
+  }, row: {
+    flex: 1,
+    justifyContent: 'space-around',
+    //backgroundColor: '#EADE2A',
+    //width: '85%',
+    //height: 80,
   },
 });
 
-export default VehicleSelect;
+export default ServiceSelect;

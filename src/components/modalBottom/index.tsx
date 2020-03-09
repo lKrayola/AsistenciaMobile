@@ -5,20 +5,35 @@ import { StyleSheet } from 'react-native';
 import Modal from 'react-native-modalbox';
 import { NavigationStateRoute, NavigationScreenProp } from 'react-navigation';
 import VehicleSelect from '../../screens/modal/vehicleSelect';
+import ServiceSelect from '../../screens/modal/serviceSelect';
 
 interface Props {
   open: boolean;
-  onModalClosed: any;
+  orderStatus: any;
+  orderInfo: any;
+  orderStatuses: any;
   navigation: NavigationScreenProp<NavigationStateRoute<any>>;
+  onModalClosed(open: boolean): any;
+  changeOrderStatus(orderStatus: any): any;
+  changeOrderInfo(orderInfo: any): any;
 }
 
 const ModalBottom = (props: Props) => {
   const [open, setOpen] = useState(props.open);
+  const [orderStatus, setOrderStatus] = useState(props.orderStatus);
 
   useEffect(() => {
     setOpen(props.open);
     console.log('Modal UseEffect [props.open] Props open', props.open);
   }, [props.open]);
+
+  useEffect(() => {
+    console.log('Modal UseEffect [props.open] Props open', orderStatus);
+  }, [orderStatus]);
+
+  useEffect(() => {
+    console.log('Modal UseEffect [props.open] Props open', props.orderStatus);
+  }, [props.orderStatus]);
 
   return (
     <Modal
@@ -31,7 +46,27 @@ const ModalBottom = (props: Props) => {
       animationDuration={250}
       useNativeDriver={true}
     >
-      <VehicleSelect open={open} onModalClosed={props.onModalClosed} navigation={props.navigation} />
+      {props.orderStatus === props.orderStatuses.locorderInfoation ? null : null}
+      {props.orderStatus === props.orderStatuses.vehicleType ?
+        <VehicleSelect
+          onModalClosed={props.onModalClosed}
+          changeOrderStatus={props.changeOrderStatus}
+          orderStatus={props.orderStatus}
+          orderStatuses={props.orderStatuses}
+          orderInfo={props.orderInfo}
+          changeOrderInfo={props.changeOrderInfo}
+          navigation={props.navigation}
+        /> : null}
+      {props.orderStatus === props.orderStatuses.services ?
+        <ServiceSelect
+          onModalClosed={props.onModalClosed}
+          changeOrderStatus={props.changeOrderStatus}
+          orderStatus={props.orderStatus}
+          orderStatuses={props.orderStatuses}
+          orderInfo={props.orderInfo}
+          changeOrderInfo={props.changeOrderInfo}
+          navigation={props.navigation} />
+        : null}
     </Modal>
   );
 };

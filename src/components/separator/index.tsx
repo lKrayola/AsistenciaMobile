@@ -10,7 +10,7 @@ export const SeparatorModal = () => {
 
 const separatorStyles = StyleSheet.create({
   modalSeparator: {
-    backgroundColor: '#D3D3D3',
+    backgroundColor: '#FFFFFF',
     //backgroundColor: '#FB3640',
     //marginTop: 10,
     //marginBottom: 10,
