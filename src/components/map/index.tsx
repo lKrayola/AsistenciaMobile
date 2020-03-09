@@ -50,7 +50,7 @@ const mapStyles = StyleSheet.create({
     alignSelf: 'center',
   },
   sheetOpen: {
-    height: '60%',
+    height: '56%',
   },
   sheetClosed: {
     height: '100%',

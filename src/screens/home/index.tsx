@@ -12,7 +12,7 @@ import { check, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import { Button } from 'react-native-elements';
 import Map from '../../components/map/index';
 import { NavigationScreenProp, NavigationStateRoute } from 'react-navigation';
-import BottomSheet from '../../components/bottomSheet';
+import ModalBottom from '../../components/modalBottom';
 import SearchBarHome from '../../components/searchBarMap';
 
 interface Props {
@@ -42,13 +42,6 @@ const Home = (props: Props) => {
   };
 
   const checkPermissions = async () => {
-    /*Promise.all([
-      check(PERMISSIONS.ANDROID.ACCESS_BACKGROUND_LOCATION),
-      check(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION),
-      check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION),
-    ]).then(([backgrLocStat, coarseLocStat, fineLocStat]) => {
-      console.log('Check Location Permissions ',{ backgrLocStat, coarseLocStat, fineLocStat });
-    });*/
     const backgrLocStat = await check(PERMISSIONS.ANDROID.ACCESS_BACKGROUND_LOCATION);
     const coarseLocStat = await check(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION);
     const fineLocStat = await check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
@@ -77,7 +70,7 @@ const Home = (props: Props) => {
 
   return (
     <>
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{ flex: 1 }}>
         <Map navigation={props.navigation} bottomSheetOpen={bottomSheetOpen} />
         <SearchBarHome navigation={props.navigation} />
         <View style={{
@@ -97,7 +90,7 @@ const Home = (props: Props) => {
             }}
           />
         </View>
-        <BottomSheet open={bottomSheetOpen} navigation={props.navigation} onModalClosed={onModalClosed} />
+        <ModalBottom open={bottomSheetOpen} navigation={props.navigation} onModalClosed={onModalClosed} />
       </SafeAreaView>
     </>
   );

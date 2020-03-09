@@ -63,7 +63,7 @@ const SearchBarHome = (props: Props) => {
           name: 'menu',
           disabled: true,
           size: 40,
-          onPress: () => { props.navigation.toggleDrawer(); },
+          onPress: () => { /*props.navigation.toggleDrawer(); */ },
         }}
         cancelIcon={{
           type: 'material',
