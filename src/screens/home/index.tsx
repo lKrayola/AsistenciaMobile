@@ -112,7 +112,7 @@ const Home = (props: Props) => {
           alignSelf: 'center',
           height: '100%',
         }}>
-          <Button
+          {orderStatus === Order.location ? <Button
             title={'Open Modal'}
             buttonStyle={{
               backgroundColor: '#FB3640',
@@ -122,7 +122,7 @@ const Home = (props: Props) => {
               setOrderStatus(Order.vehicleType);
               console.log('pushed open modal button', modalOpen);
             }}
-          />
+          /> : null}
         </View>
         <ModalBottom
           open={modalOpen}
