@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
@@ -24,11 +25,32 @@ const Home = (props: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [orderStatus, setOrderStatus] = useState(Order.location);
   const [orderInfo, setOrderInfo] = useState({
-    id: '',
+    userId: '',
     orderId: '',
     vehicleType: '',
     location: '',
-    services: '',
+    date: '',
+    services: {
+      cambioDeLlanta: {
+        added: false,
+        qty: 0,
+        estimatedCost: '0.00$',
+      },
+      combustible: {
+        added: false,
+        type: '',
+        estimatedCost: '0.00$',
+      },
+      paseCorriente: {
+        added: false,
+        estimatedCost: '0.00$',
+      },
+    },
+    subTotal: '0.00$',
+    total: '0.00$',
+    orderConfirmed: false,
+    orderCanceled: false,
+    orderCompleted: false,
   });
 
   useEffect(() => {

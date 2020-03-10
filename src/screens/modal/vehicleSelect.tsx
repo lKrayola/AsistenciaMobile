@@ -21,6 +21,14 @@ interface Props {
 
 const VehicleSelect = (props: Props) => {
 
+  const undoOrderInfo = () => {
+    let tempInfo = props.orderInfo;
+    tempInfo.vehicleType = '';
+    props.changeOrderInfo(tempInfo);
+    props.changeOrderStatus(props.orderStatuses.location);
+    props.onModalClosed(false);
+  };
+
   const modalButtons = [
     {
       id: '1',

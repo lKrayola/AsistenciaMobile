@@ -22,6 +22,28 @@ interface Props {
 
 const ServiceSelect = (props: Props) => {
 
+  const undoOrderInfo = () => {
+    let tempInfo = props.orderInfo;
+    tempInfo.services = {
+      cambioDeLlanta: {
+        added: false,
+        qty: 0,
+        estimatedCost: '0.00$',
+      },
+      combustible: {
+        added: false,
+        type: '',
+        estimatedCost: '0.00$',
+      },
+      paseCorriente: {
+        added: false,
+        estimatedCost: '0.00$',
+      },
+    };
+    props.changeOrderInfo(tempInfo);
+    props.changeOrderStatus(props.orderStatuses.vehicleType);
+  };
+
   const modalButtons = [
     {
       id: '1',
@@ -30,7 +52,7 @@ const ServiceSelect = (props: Props) => {
       onPress: () => {
         props.changeOrderStatus(props.orderStatuses.services);
         let tempInfo = props.orderInfo;
-        tempInfo.services = 'Cambio de Llanta';
+        tempInfo.services.cambioDeLlanta.added = true;
         props.changeOrderInfo(tempInfo);
       },
     },
@@ -41,7 +63,7 @@ const ServiceSelect = (props: Props) => {
       onPress: () => {
         props.changeOrderStatus(props.orderStatuses.services);
         let tempInfo = props.orderInfo;
-        tempInfo.services = 'Combustible';
+        tempInfo.services.combustible.added = true;
         props.changeOrderInfo(tempInfo);
       },
     },
@@ -52,7 +74,7 @@ const ServiceSelect = (props: Props) => {
       onPress: () => {
         props.changeOrderStatus(props.orderStatuses.services);
         let tempInfo = props.orderInfo;
-        tempInfo.services = 'Pase de Corriente';
+        tempInfo.services.paseCorriente.added = true;
         props.changeOrderInfo(tempInfo);
       },
     },
