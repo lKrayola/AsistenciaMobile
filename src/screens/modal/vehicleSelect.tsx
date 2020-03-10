@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Icon, ListItem } from 'react-native-elements';
 import { NavigationStateRoute, NavigationScreenProp } from 'react-navigation';
 import { SeparatorModalGrey, SeparatorModalWhite } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
@@ -64,11 +64,15 @@ const VehicleSelect = (props: Props) => {
 
   const _renderItem = (item: any) => {
     return (
-      <Button
+      <ListItem
         key={item.id}
         title={item.title}
+        titleStyle={{ fontSize: 22, marginLeft: 15 }}
         onPress={item.onPress}
-        buttonStyle={vehicleSelectStyles.button}
+        chevron={<Icon type="material"
+          name="chevron-right"
+          size={40}
+        />}
       />
     );
   };
