@@ -56,6 +56,13 @@ const ServiceSelect = (props: Props) => {
         props.changeOrderInfo(tempInfo);
       },
     },
+    {
+      id: '4',
+      title: 'Revision',
+      style: serviceSelectStyles.buttonRevision,
+      onPress: () => {
+      },
+    },
   ];
 
   const _renderItem = (item: any) => {
@@ -73,10 +80,10 @@ const ServiceSelect = (props: Props) => {
     <View style={serviceSelectStyles.sectionContainerModal}>
       <View
         style={{
-          borderWidth: 0,
+          borderWidth: 2,
           borderColor: 'yellow',
           width: '100%',
-          paddingBottom: 10,
+          paddingBottom: 5,
           flexDirection: 'row',
           alignItems: 'flex-start',
         }}>
@@ -105,7 +112,7 @@ const ServiceSelect = (props: Props) => {
           keyExtractor={(item: any) => item.id}
           renderItem={({ item }: any) => _renderItem(item)}
           onEndReachedThreshold={0.5}
-          style={{ width: '100%', alignSelf: 'center', margin: 5 }}
+          style={{ width: '100%' }}
           columnWrapperStyle={serviceSelectStyles.row}
           numColumns={2}
         />
@@ -123,7 +130,7 @@ const serviceSelectStyles = StyleSheet.create({
     marginHorizontal: 20,
     width: '100%',
     height: '100%',
-    //borderWidth: 2,
+    borderWidth: 2,
     borderColor: 'blue',
   },
   flatlistContainerModal: {
@@ -133,30 +140,41 @@ const serviceSelectStyles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 20,
     width: '95%',
-    height: 100,
-    //borderWidth: 3,
+    height: '100%',
+    borderWidth: 3,
     borderColor: 'black',
   },
   buttonLlanta: {
     backgroundColor: '#80397B',
-    width: '85%',
-    height: 80,
+    width: '80%',
+    alignSelf: 'center',
+    height: 130,
   },
   buttonCombustible: {
     backgroundColor: '#D13438',
-    width: '85%',
-    height: 80,
+    alignSelf: 'center',
+    width: '80%',
+    height: 130,
   },
   buttonCorriente: {
     backgroundColor: '#EADE2A',
+    alignSelf: 'center',
+    width: '80%',
+    height: 130,
+  },
+  buttonRevision: {
+    backgroundColor: '#605F5E',
+    alignSelf: 'center',
     width: '85%',
-    height: 80,
-  }, row: {
+    height: 130,
+  },
+  row: {
     flex: 1,
     justifyContent: 'space-around',
-    //backgroundColor: '#EADE2A',
     //width: '85%',
     //height: 80,
+    borderWidth: 3,
+    borderColor: 'purple',
   },
 });
 

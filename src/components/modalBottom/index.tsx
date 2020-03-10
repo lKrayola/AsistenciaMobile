@@ -77,7 +77,7 @@ const modalStyles = StyleSheet.create({
     borderTopRightRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    height: '45%',
+    height: '50%',
     alignSelf: 'flex-end',
     position: 'relative',
     shadowOpacity: 0.75,

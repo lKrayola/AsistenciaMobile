@@ -72,7 +72,7 @@ const VehicleSelect = (props: Props) => {
           borderWidth: 0,
           borderColor: 'yellow',
           width: '100%',
-          paddingBottom: 10,
+          paddingBottom: 5,
           flexDirection: 'row',
           alignItems: 'flex-start',
         }}>
