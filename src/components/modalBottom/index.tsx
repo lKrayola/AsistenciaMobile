@@ -20,16 +20,14 @@ interface Props {
 
 const ModalBottom = (props: Props) => {
   const [open, setOpen] = useState(props.open);
-  const [orderStatus, setOrderStatus] = useState(props.orderStatus);
-
   useEffect(() => {
     setOpen(props.open);
     console.log('Modal UseEffect [props.open] Props open', props.open);
   }, [props.open]);
 
   useEffect(() => {
-    console.log('Modal UseEffect [props.open] Props open', orderStatus);
-  }, [orderStatus]);
+    console.log('Modal UseEffect [props.open] Props open', props.orderStatus);
+  }, [props.orderStatus]);
 
   useEffect(() => {
     console.log('Modal UseEffect [props.open] Props open', props.orderStatus);
@@ -46,7 +44,7 @@ const ModalBottom = (props: Props) => {
       animationDuration={250}
       useNativeDriver={true}
     >
-      {props.orderStatus === props.orderStatuses.locorderInfoation ? null : null}
+      {props.orderStatus === props.orderStatuses.location ? null : null}
       {props.orderStatus === props.orderStatuses.vehicleType ?
         <VehicleSelect
           onModalClosed={props.onModalClosed}
@@ -65,8 +63,13 @@ const ModalBottom = (props: Props) => {
           orderStatuses={props.orderStatuses}
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
-          navigation={props.navigation} />
-        : null}
+          navigation={props.navigation}
+        /> : null}
+      {props.orderStatus === props.orderStatuses.ordered ? null : null}
+      {props.orderStatus === props.orderStatuses.review ? null : null}
+      {props.orderStatus === props.orderStatuses.waiting ? null : null}
+      {props.orderStatus === props.orderStatuses.completed ? null : null}
+      {props.orderStatus === props.orderStatuses.canceled ? null : null}
     </Modal>
   );
 };

@@ -77,35 +77,36 @@ const VehicleSelect = (props: Props) => {
     <View style={vehicleSelectStyles.sectionContainerModal}>
       <View
         style={{
-          borderWidth: 0,
-          borderColor: 'yellow',
+          //borderWidth: 0,
+          //borderColor: 'yellow',
           width: '100%',
           paddingBottom: 5,
           flexDirection: 'row',
-          alignItems: 'flex-start',
+          alignItems: 'center',
         }}>
-        <Icon type="material"
-          name="keyboard-arrow-left"
-          size={25}
-          style={{ marginHorizontal: 20 }}
-          raised={true}
-          onPress={() => {
-            let tempInfo = props.orderInfo;
-            tempInfo.vehicleType = '';
-            props.changeOrderInfo(tempInfo);
-            props.changeOrderStatus(props.orderStatuses.location);
-            props.onModalClosed(false);
-          }}
-        />
+        <View style={{ marginLeft: 10 }}>
+          <Icon type="material"
+            name="keyboard-backspace"
+            size={40}
+            //raised={true}
+            onPress={undoOrderInfo}
+          />
+        </View>
         <Text style={{ fontSize: 25, alignSelf: 'center', marginHorizontal: 10 }}>
           Tipo de vehículo
         </Text>
+        <Icon type="material"
+          name="info"
+          size={35}
+          //raised={true}
+          onPress={() => { }}
+        />
       </View>
       <SeparatorModal />
       <View style={vehicleSelectStyles.flatlistContainerModal}>
         <FlatList
           data={modalButtons}
-          ItemSeparatorComponent={SeparatorModal}
+          ItemSeparatorComponent={SeparatorModalGrey}
           keyExtractor={(item: any) => item.id}
           renderItem={({ item }: any) => _renderItem(item)}
           onEndReachedThreshold={0.5}
@@ -138,11 +139,6 @@ const vehicleSelectStyles = StyleSheet.create({
     height: '100%',
     //borderWidth: 3,
     borderColor: 'black',
-  },
-  button: {
-    backgroundColor: '#FB3640',
-    width: '100%',
-    height: 80,
   },
 });
 

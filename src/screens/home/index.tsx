@@ -21,7 +21,11 @@ interface Props {
 }
 
 const Home = (props: Props) => {
-  enum Order { location, vehicleType, services, ordered }
+  enum Order {
+    location, vehicleType, services,
+    ordered, review, waiting,
+    completed, canceled
+  }
   const [modalOpen, setModalOpen] = useState(false);
   const [orderStatus, setOrderStatus] = useState(Order.location);
   const [orderInfo, setOrderInfo] = useState({

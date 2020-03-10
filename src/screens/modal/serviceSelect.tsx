@@ -11,13 +11,12 @@ import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
   orderStatus: any;
-  changeOrderStatus: any;
   orderStatuses: any;
-  onModalClosed: any;
-  changeOrderInfo: any;
   orderInfo: any;
+  onModalClosed(open: boolean): any;
+  changeOrderStatus(orderStatus: any): any;
+  changeOrderInfo(orderInfo: any): any;
   navigation: NavigationScreenProp<NavigationStateRoute<any>>;
-
 }
 
 const ServiceSelect = (props: Props) => {
@@ -109,6 +108,7 @@ const ServiceSelect = (props: Props) => {
           flexDirection: 'row',
           alignItems: 'flex-start',
         }}>
+        <View style={{ marginLeft: 10 }}>
         <Icon type="material"
           name="keyboard-arrow-left"
           size={25}
