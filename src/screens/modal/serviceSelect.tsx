@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
@@ -92,7 +92,7 @@ const ServiceSelect = (props: Props) => {
         key={item.id}
         title={item.title}
         onPress={item.onPress}
-        buttonStyle={item.style}
+        buttonStyle={[item.style, { borderRadius: 0 }]}
       />
     );
   };
@@ -101,10 +101,10 @@ const ServiceSelect = (props: Props) => {
     <View style={serviceSelectStyles.sectionContainerModal}>
       <View
         style={{
-          borderWidth: 2,
-          borderColor: 'yellow',
+          //borderWidth: 2,
+          //borderColor: 'yellow',
           width: '100%',
-          paddingBottom: 5,
+          paddingBottom: 10,
           flexDirection: 'row',
           alignItems: 'flex-start',
         }}>
@@ -146,7 +146,7 @@ const serviceSelectStyles = StyleSheet.create({
     marginHorizontal: 20,
     width: '100%',
     height: '100%',
-    borderWidth: 2,
+    //borderWidth: 2,
     borderColor: 'blue',
   },
   flatlistContainerModal: {
@@ -154,10 +154,10 @@ const serviceSelectStyles = StyleSheet.create({
     marginVertical: 1,
     alignItems: 'center',
     flex: 1,
-    marginHorizontal: 20,
-    width: '95%',
+    //marginHorizontal: 20,
+    width: '100%',
     height: '100%',
-    borderWidth: 3,
+    //borderWidth: 3,
     borderColor: 'black',
   },
   buttonLlanta: {
@@ -189,7 +189,7 @@ const serviceSelectStyles = StyleSheet.create({
     justifyContent: 'space-around',
     //width: '85%',
     //height: 80,
-    borderWidth: 3,
+    //borderWidth: 3,
     borderColor: 'purple',
   },
 });

@@ -5,7 +5,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   View,
 } from 'react-native';
 
@@ -74,7 +73,6 @@ const Home = (props: Props) => {
     console.log('Order Info', orderInfo);
   }, [orderInfo]);
 
-
   const onModalClosed = async (open: any) => {
     await setModalOpen(open);
     console.log('onmodalclosed done', modalOpen);
@@ -94,7 +92,6 @@ const Home = (props: Props) => {
     console.log('');
     console.log('ChangeOrderInfo', orderInfo);
   };
-
 
   const requestPermissions = async () => {
     requestLocationPermissions();
@@ -134,7 +131,7 @@ const Home = (props: Props) => {
         {orderStatus === Order.location ? <SearchBarHome navigation={props.navigation} /> : null}
         <View style={{
           position: 'absolute',
-          top: '5%',
+          top: '7%',
           alignSelf: 'center',
           height: '100%',
         }}>
