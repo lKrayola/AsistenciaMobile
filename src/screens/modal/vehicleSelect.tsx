@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { NavigationStateRoute, NavigationScreenProp } from 'react-navigation';
-import { SeparatorModal } from '../../components/separator';
+import { SeparatorModalGrey, SeparatorModalWhite } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
@@ -102,8 +102,9 @@ const VehicleSelect = (props: Props) => {
           onPress={() => { }}
         />
       </View>
-      <SeparatorModal />
+      <SeparatorModalWhite />
       <View style={vehicleSelectStyles.flatlistContainerModal}>
+        <SeparatorModalGrey />
         <FlatList
           data={modalButtons}
           ItemSeparatorComponent={SeparatorModalGrey}

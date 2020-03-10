@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { NavigationStateRoute, NavigationScreenProp } from 'react-navigation';
-import { SeparatorModal } from '../../components/separator';
+import { SeparatorModalWhite } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
@@ -109,28 +109,22 @@ const ServiceSelect = (props: Props) => {
           alignItems: 'flex-start',
         }}>
         <View style={{ marginLeft: 10 }}>
-        <Icon type="material"
-          name="keyboard-arrow-left"
-          size={25}
-          style={{ marginHorizontal: 20 }}
-          raised={true}
-          onPress={() => {
-            let tempInfo = props.orderInfo;
-            tempInfo.services = '';
-            props.changeOrderInfo(tempInfo);
-            props.changeOrderStatus(props.orderStatuses.vehicleType);
-            //props.onModalClosed(false);
-          }}
-        />
+          <Icon type="material"
+            name="keyboard-backspace"
+            size={40}
+            //raised={true}
+            onPress={undoOrderInfo}
+          />
+        </View>
         <Text style={{ fontSize: 25, alignSelf: 'center', marginHorizontal: 10 }}>
           Servicios
         </Text>
       </View>
-      <SeparatorModal />
+      <SeparatorModalWhite />
       <View style={serviceSelectStyles.flatlistContainerModal}>
         <FlatList
           data={modalButtons}
-          ItemSeparatorComponent={SeparatorModal}
+          ItemSeparatorComponent={SeparatorModalWhite}
           keyExtractor={(item: any) => item.id}
           renderItem={({ item }: any) => _renderItem(item)}
           onEndReachedThreshold={0.5}
@@ -139,7 +133,7 @@ const ServiceSelect = (props: Props) => {
           numColumns={2}
         />
       </View>
-    </View>
+    </View >
   );
 };
 
