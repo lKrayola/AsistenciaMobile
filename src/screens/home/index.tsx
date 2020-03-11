@@ -127,8 +127,8 @@ const Home = (props: Props) => {
   return (
     <>
       <SafeAreaView style={{ flex: 1 }}>
-        <Map navigation={props.navigation} modalOpen={modalOpen} />
-        {orderStatus === Order.location ? <SearchBarHome navigation={props.navigation} /> : null}
+        <Map modalOpen={modalOpen} />
+        {orderStatus === Order.location ? <SearchBarHome /> : null}
         <View style={{
           position: 'absolute',
           top: '7%',
@@ -149,7 +149,6 @@ const Home = (props: Props) => {
         </View>
         <ModalBottom
           open={modalOpen}
-          navigation={props.navigation}
           onModalClosed={onModalClosed}
           orderStatus={orderStatus}
           orderStatuses={Order}

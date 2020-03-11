@@ -5,7 +5,6 @@ import React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
-import { NavigationStateRoute, NavigationScreenProp } from 'react-navigation';
 import { SeparatorModalWhite } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -16,7 +15,6 @@ interface Props {
   onModalClosed(open: boolean): any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
 }
 
 const ServiceSelect = (props: Props) => {

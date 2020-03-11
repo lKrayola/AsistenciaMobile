@@ -2,10 +2,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { NavigationScreenProp, NavigationStateRoute } from 'react-navigation';
 
 interface Props {
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
   modalOpen: boolean
 }
 

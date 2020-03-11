@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 import { StyleSheet } from 'react-native';
 import Modal from 'react-native-modalbox';
-import { NavigationStateRoute, NavigationScreenProp } from 'react-navigation';
 import VehicleSelect from '../../screens/modal/vehicleSelect';
 import ServiceSelect from '../../screens/modal/serviceSelect';
 
@@ -12,7 +11,6 @@ interface Props {
   orderStatus: any;
   orderInfo: any;
   orderStatuses: any;
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
   onModalClosed(open: boolean): any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
@@ -53,7 +51,6 @@ const ModalBottom = (props: Props) => {
           orderStatuses={props.orderStatuses}
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
-          navigation={props.navigation}
         /> : null}
       {props.orderStatus === props.orderStatuses.services ?
         <ServiceSelect
@@ -63,7 +60,6 @@ const ModalBottom = (props: Props) => {
           orderStatuses={props.orderStatuses}
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
-          navigation={props.navigation}
         /> : null}
       {props.orderStatus === props.orderStatuses.ordered ? null : null}
       {props.orderStatus === props.orderStatuses.review ? null : null}

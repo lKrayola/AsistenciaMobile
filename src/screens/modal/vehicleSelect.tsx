@@ -13,7 +13,6 @@ interface Props {
   orderStatus: any;
   orderStatuses: any;
   orderInfo: any;
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
   onModalClosed(open: boolean): any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
