@@ -5,6 +5,9 @@ import { StyleSheet } from 'react-native';
 import Modal from 'react-native-modalbox';
 import VehicleSelect from '../../screens/modal/vehicleSelect';
 import ServiceSelect from '../../screens/modal/serviceSelect';
+import Tire from '../../screens/modal/services/tire';
+import Gas from '../../screens/modal/services/gas';
+import Power from '../../screens/modal/services/power';
 
 interface Props {
   open: boolean;
@@ -17,7 +20,11 @@ interface Props {
 }
 
 const ModalBottom = (props: Props) => {
+  enum ServiceAdd {
+    none, tire, gas, power
+  }
   const [open, setOpen] = useState(props.open);
+  const [serviceSelected, setServiceSelected] = useState(ServiceAdd.none);
   useEffect(() => {
     setOpen(props.open);
     console.log('Modal UseEffect [props.open] Props open', props.open);
@@ -30,6 +37,19 @@ const ModalBottom = (props: Props) => {
   useEffect(() => {
     console.log('Modal UseEffect [props.open] Props open', props.orderStatus);
   }, [props.orderStatus]);
+
+  useEffect(() => {
+    console.log('Service State');
+  }, [props.orderStatus]);
+
+  useEffect(() => {
+    console.log('Change Service Selected', serviceSelected);
+  }, [serviceSelected]);
+
+  const changeServiceSelected = async (service: any) => {
+    await setServiceSelected(service);
+
+  };
 
   return (
     <Modal
@@ -47,19 +67,39 @@ const ModalBottom = (props: Props) => {
         <VehicleSelect
           onModalClosed={props.onModalClosed}
           changeOrderStatus={props.changeOrderStatus}
-          orderStatus={props.orderStatus}
           orderStatuses={props.orderStatuses}
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
         /> : null}
-      {props.orderStatus === props.orderStatuses.services ?
+      {(props.orderStatus === props.orderStatuses.services) &&
+        serviceSelected === ServiceAdd.none ?
         <ServiceSelect
-          onModalClosed={props.onModalClosed}
           changeOrderStatus={props.changeOrderStatus}
-          orderStatus={props.orderStatus}
           orderStatuses={props.orderStatuses}
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
+          changeServiceSelected={changeServiceSelected}
+        /> : null}
+      {(props.orderStatus === props.orderStatuses.services) &&
+        serviceSelected === ServiceAdd.tire ?
+        <Tire
+          orderInfo={props.orderInfo}
+          changeOrderInfo={props.changeOrderInfo}
+          changeServiceSelected={changeServiceSelected}
+        /> : null}
+      {(props.orderStatus === props.orderStatuses.services) &&
+        serviceSelected === ServiceAdd.gas ?
+        <Gas
+          orderInfo={props.orderInfo}
+          changeOrderInfo={props.changeOrderInfo}
+          changeServiceSelected={changeServiceSelected}
+        /> : null}
+      {(props.orderStatus === props.orderStatuses.services) &&
+        serviceSelected === ServiceAdd.power ?
+        <Power
+          orderInfo={props.orderInfo}
+          changeOrderInfo={props.changeOrderInfo}
+          changeServiceSelected={changeServiceSelected}
         /> : null}
       {props.orderStatus === props.orderStatuses.ordered ? null : null}
       {props.orderStatus === props.orderStatuses.review ? null : null}
@@ -74,7 +114,7 @@ const modalStyles = StyleSheet.create({
   modalBase: {
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    justifyContent: 'center',
+    //justifyContent: 'center',
     alignItems: 'center',
     height: '50%',
     alignSelf: 'flex-end',

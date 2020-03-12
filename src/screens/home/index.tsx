@@ -20,13 +20,13 @@ interface Props {
 }
 
 const Home = (props: Props) => {
-  enum Order {
-    location, vehicleType, services,
+  enum OrderStatus {
+    location, vehicleType, selectServices,
     ordered, review, waiting,
     completed, canceled
   }
   const [modalOpen, setModalOpen] = useState(false);
-  const [orderStatus, setOrderStatus] = useState(Order.location);
+  const [orderStatus, setOrderStatus] = useState(OrderStatus.location);
   const [orderInfo, setOrderInfo] = useState({
     userId: '',
     orderId: '',
@@ -80,7 +80,7 @@ const Home = (props: Props) => {
 
   const changeOrderStatus = async (status: any) => {
     await setOrderStatus(status);
-    if (orderStatus === Order.location) {
+    if (orderStatus === OrderStatus.location) {
       await setModalOpen(false);
     }
     console.log('ChangeOrderStatus', orderStatus);
@@ -128,21 +128,21 @@ const Home = (props: Props) => {
     <>
       <SafeAreaView style={{ flex: 1 }}>
         <Map modalOpen={modalOpen} />
-        {orderStatus === Order.location ? <SearchBarHome /> : null}
+        {orderStatus === OrderStatus.location ? <SearchBarHome /> : null}
         <View style={{
           position: 'absolute',
           top: '7%',
           alignSelf: 'center',
           height: '100%',
         }}>
-          {orderStatus === Order.location ? <Button
+          {orderStatus === OrderStatus.location ? <Button
             title={'Open Modal'}
             buttonStyle={{
               backgroundColor: '#FB3640',
             }}
             onPress={() => {
               setModalOpen(true);
-              setOrderStatus(Order.vehicleType);
+              setOrderStatus(OrderStatus.vehicleType);
               console.log('pushed open modal button', modalOpen);
             }}
           /> : null}
@@ -151,7 +151,7 @@ const Home = (props: Props) => {
           open={modalOpen}
           onModalClosed={onModalClosed}
           orderStatus={orderStatus}
-          orderStatuses={Order}
+          orderStatuses={OrderStatus}
           changeOrderStatus={changeOrderStatus}
           orderInfo={orderInfo}
           changeOrderInfo={changeOrderInfo}
