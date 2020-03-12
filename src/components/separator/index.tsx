@@ -17,7 +17,7 @@ const separatorStyles = StyleSheet.create({
   modalSeparatorGray: {
     //backgroundColor: '#FFFFFF',
     //backgroundColor: '#FB3640',
-    backgroundColor: '#D3D3D3',
+    backgroundColor: '#4A4A4A',
     //marginTop: 10,
     //marginBottom: 10,
     //flexGrow: 0,
@@ -25,7 +25,7 @@ const separatorStyles = StyleSheet.create({
     //justifyContent: 'center',
     width: '100%',
     height: 5,
-    borderRadius: 10,
+    borderRadius: 0,
   },
   modalSeparatorWhite: {
     backgroundColor: '#FFFFFF',

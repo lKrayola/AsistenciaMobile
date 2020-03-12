@@ -10,7 +10,6 @@ import { SeparatorModalGrey, SeparatorModalWhite } from '../../components/separa
 import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
-  orderStatus: any;
   orderStatuses: any;
   orderInfo: any;
   onModalClosed(open: boolean): any;
