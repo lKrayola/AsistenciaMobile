@@ -5,16 +5,15 @@ import React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
-import { SeparatorModalWhite } from '../../components/separator';
+import { SeparatorModalWhite, SeparatorModalGrey } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
-  orderStatus: any;
   orderStatuses: any;
   orderInfo: any;
-  onModalClosed(open: boolean): any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
+  changeServiceSelected(service: any): any;
 }
 
 const ServiceSelect = (props: Props) => {
@@ -47,21 +46,15 @@ const ServiceSelect = (props: Props) => {
       title: 'Cambio de Llanta',
       style: serviceSelectStyles.buttonLlanta,
       onPress: () => {
-        props.changeOrderStatus(props.orderStatuses.services);
-        let tempInfo = props.orderInfo;
-        tempInfo.services.cambioDeLlanta.added = true;
-        props.changeOrderInfo(tempInfo);
+        props.changeServiceSelected(1);
       },
     },
     {
       id: '2',
-      title: 'Combustible',
+      title: ['\n Combustible \n', props.orderInfo.services.combustible.type],
       style: serviceSelectStyles.buttonCombustible,
       onPress: () => {
-        props.changeOrderStatus(props.orderStatuses.services);
-        let tempInfo = props.orderInfo;
-        tempInfo.services.combustible.added = true;
-        props.changeOrderInfo(tempInfo);
+        props.changeServiceSelected(2);
       },
     },
     {
@@ -69,10 +62,7 @@ const ServiceSelect = (props: Props) => {
       title: 'Pase de Corriente',
       style: serviceSelectStyles.buttonCorriente,
       onPress: () => {
-        props.changeOrderStatus(props.orderStatuses.services);
-        let tempInfo = props.orderInfo;
-        tempInfo.services.paseCorriente.added = true;
-        props.changeOrderInfo(tempInfo);
+        props.changeServiceSelected(3);
       },
     },
     {
@@ -118,6 +108,9 @@ const ServiceSelect = (props: Props) => {
           Servicios
         </Text>
       </View>
+
+      <SeparatorModalGrey />
+      <SeparatorModalWhite />
       <SeparatorModalWhite />
       <View style={serviceSelectStyles.flatlistContainerModal}>
         <FlatList
