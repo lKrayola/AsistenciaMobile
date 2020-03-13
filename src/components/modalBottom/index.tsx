@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
 
@@ -21,7 +22,7 @@ interface Props {
 
 const ModalBottom = (props: Props) => {
   enum ServiceAdd {
-    none, tire, gas, power
+    none, tire, gas, power, any
   }
   const [open, setOpen] = useState(props.open);
   const [serviceSelected, setServiceSelected] = useState(ServiceAdd.none);
@@ -31,15 +32,16 @@ const ModalBottom = (props: Props) => {
   }, [props.open]);
 
   useEffect(() => {
-    console.log('Modal UseEffect [props.open] Props open', props.orderStatus);
-  }, [props.orderStatus]);
+    console.log('Service selected', props.orderInfo);
+    //if (props.orderInfo.services.cambioDeLlanta.added ||
+    //  props.orderInfo.services.combustible.added ||
+    //  props.orderInfo.services.paseCorriente.added) {
+    //  setServiceSelected(0);
+    //}
+  }, [props.orderInfo]);
 
   useEffect(() => {
-    console.log('Modal UseEffect [props.open] Props open', props.orderStatus);
-  }, [props.orderStatus]);
-
-  useEffect(() => {
-    console.log('Service State');
+    console.log('Order Status', props.orderStatus);
   }, [props.orderStatus]);
 
   useEffect(() => {
@@ -48,7 +50,6 @@ const ModalBottom = (props: Props) => {
 
   const changeServiceSelected = async (service: any) => {
     await setServiceSelected(service);
-
   };
 
   return (
@@ -62,8 +63,8 @@ const ModalBottom = (props: Props) => {
       animationDuration={250}
       useNativeDriver={true}
     >
-      {props.orderStatus === props.orderStatuses.location ? null : null}
-      {props.orderStatus === props.orderStatuses.vehicleType ?
+      {props.orderStatus == props.orderStatuses.location ? null : null}
+      {props.orderStatus == props.orderStatuses.vehicleType ?
         <VehicleSelect
           onModalClosed={props.onModalClosed}
           changeOrderStatus={props.changeOrderStatus}
@@ -71,41 +72,45 @@ const ModalBottom = (props: Props) => {
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
         /> : null}
-      {(props.orderStatus === props.orderStatuses.services) &&
-        serviceSelected === ServiceAdd.none ?
+      {(props.orderStatus == props.orderStatuses.selectServices) &&
+        (serviceSelected == ServiceAdd.none || serviceSelected == ServiceAdd.any) ?
         <ServiceSelect
+          serviceSelected={serviceSelected}
           changeOrderStatus={props.changeOrderStatus}
-          orderStatuses={props.orderStatuses}
           orderInfo={props.orderInfo}
+          orderStatuses={props.orderStatuses}
           changeOrderInfo={props.changeOrderInfo}
           changeServiceSelected={changeServiceSelected}
         /> : null}
-      {(props.orderStatus === props.orderStatuses.services) &&
-        serviceSelected === ServiceAdd.tire ?
+      {(props.orderStatus == props.orderStatuses.selectServices) &&
+        serviceSelected == ServiceAdd.tire ?
         <Tire
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
           changeServiceSelected={changeServiceSelected}
+          changeOrderStatus={props.changeOrderStatus}
         /> : null}
-      {(props.orderStatus === props.orderStatuses.services) &&
-        serviceSelected === ServiceAdd.gas ?
+      {(props.orderStatus == props.orderStatuses.selectServices) &&
+        serviceSelected == ServiceAdd.gas ?
         <Gas
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
           changeServiceSelected={changeServiceSelected}
+          changeOrderStatus={props.changeOrderStatus}
         /> : null}
-      {(props.orderStatus === props.orderStatuses.services) &&
-        serviceSelected === ServiceAdd.power ?
+      {(props.orderStatus == props.orderStatuses.selectServices) &&
+        serviceSelected == ServiceAdd.power ?
         <Power
           orderInfo={props.orderInfo}
           changeOrderInfo={props.changeOrderInfo}
+          changeOrderStatus={props.changeOrderStatus}
           changeServiceSelected={changeServiceSelected}
         /> : null}
-      {props.orderStatus === props.orderStatuses.ordered ? null : null}
-      {props.orderStatus === props.orderStatuses.review ? null : null}
-      {props.orderStatus === props.orderStatuses.waiting ? null : null}
-      {props.orderStatus === props.orderStatuses.completed ? null : null}
-      {props.orderStatus === props.orderStatuses.canceled ? null : null}
+      {/*props.orderStatus === props.orderStatuses.added ? null : null*/}
+      {props.orderStatus == props.orderStatuses.review ? null : null}
+      {props.orderStatus == props.orderStatuses.waiting ? null : null}
+      {props.orderStatus == props.orderStatuses.completed ? null : null}
+      {props.orderStatus == props.orderStatuses.canceled ? null : null}
     </Modal>
   );
 };

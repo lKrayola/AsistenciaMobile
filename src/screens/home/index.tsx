@@ -22,7 +22,7 @@ interface Props {
 const Home = (props: Props) => {
   enum OrderStatus {
     location, vehicleType, selectServices,
-    ordered, review, waiting,
+    added, review, waiting,
     completed, canceled
   }
   const [modalOpen, setModalOpen] = useState(false);

@@ -8,8 +8,9 @@ import { SeparatorModalWhite, SeparatorModalGrey } from '../../components/separa
 import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
-  orderStatuses: any;
+  serviceSelected: any;
   orderInfo: any;
+  orderStatuses: any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
@@ -51,7 +52,7 @@ const ServiceSelect = (props: Props) => {
     },
     {
       id: '2',
-      title: `Combustible${props.orderInfo.services.combustible.type !== '' ? `\n${props.orderInfo.services.combustible.type}` : ''}`,
+      title: 'Entrega de\nCombustible',
       style: serviceSelectStyles.buttonCombustible,
       onPress: () => {
         props.changeServiceSelected(2);
@@ -81,7 +82,7 @@ const ServiceSelect = (props: Props) => {
     switch (id) {
       case '1':
         if (props.orderInfo.services.cambioDeLlanta.added) {
-          return props.orderInfo.services.combustible.type;
+          return '1';
         }
         else {
           return false;
@@ -113,9 +114,9 @@ const ServiceSelect = (props: Props) => {
           buttonStyle={[item.style, { borderRadius: 0 }]}
           disabled={item.disabled}
         />
-        {(!item.disabled && checkItemAdd(item.id)) ? <Badge value={checkItemAdd(item.id)}
+        {(!item.disabled && checkItemAdd(item.id)) ? <Badge value={checkItemAdd(item.id) + ' '}
           containerStyle={{ position: 'absolute', top: '78%', right: '15%', flexGrow: 1 }}
-          badgeStyle={{ backgroundColor: 'white', borderRadius: 2 }}
+          badgeStyle={{ backgroundColor: 'white', borderRadius: 2, width: '100%' }}
           textStyle={{ color: item.color, fontWeight: 'bold' }}
         /> : null}
       </View>
@@ -144,6 +145,15 @@ const ServiceSelect = (props: Props) => {
         <Text style={{ fontSize: 25, alignSelf: 'center', marginHorizontal: 10 }}>
           Servicios
         </Text>
+        {(props.orderInfo.services.cambioDeLlanta.added ||
+          props.orderInfo.services.combustible.added ||
+          props.orderInfo.services.paseCorriente.added) ?
+          <Button title="Realizar Pedido"
+            onPress={() => { props.changeOrderStatus(4); }}
+          />
+          :
+          null
+        }
       </View>
 
       <SeparatorModalGrey />

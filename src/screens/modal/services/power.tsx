@@ -11,6 +11,7 @@ interface Props {
   orderInfo: any;
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
+  changeOrderStatus(orderStatus: any): any;
 }
 
 const Power = (props: Props) => {
@@ -25,17 +26,16 @@ const Power = (props: Props) => {
     props.changeServiceSelected(0);
   };
 
-  const modalButtons = [
-    {
-      title: 'Confirmar',
-      //style: serviceSelectStyles.buttonLlanta,
-      onPress: () => {
-        let tempInfo = props.orderInfo;
-        tempInfo.services.paseCorriente.added = true;
-        props.changeOrderInfo(tempInfo);
-      },
-    },
-  ];
+  const onConfirmPress = () => {
+    let tempInfo = props.orderInfo;
+    tempInfo.services.paseCorriente = {
+      added: true,
+      estimatedCost: '0.00$',
+    };
+    props.changeOrderInfo(tempInfo);
+    //props.changeOrderStatus(3);
+    props.changeServiceSelected(4);
+  };
 
   return (
     <View style={serviceSelectStyles.sectionContainerModal}>
@@ -74,10 +74,10 @@ const Power = (props: Props) => {
           style={{ fontSize: 20 }}
         >Costo estimado: {props.orderInfo.services.combustible.estimatedCost}</Text>
         <Button
-          title={'Confirmar'}
+          title={'Añadir'}
           titleStyle={{ fontSize: 20 }}
           buttonStyle={serviceSelectStyles.confirmButton}
-          onPress={() => { }}
+          onPress={onConfirmPress}
         />
       </View>
 

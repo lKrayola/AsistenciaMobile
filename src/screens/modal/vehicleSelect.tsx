@@ -32,7 +32,7 @@ const VehicleSelect = (props: Props) => {
       id: '1',
       title: 'Sedan',
       onPress: () => {
-        props.changeOrderStatus(props.orderStatuses.services);
+        props.changeOrderStatus(props.orderStatuses.selectServices);
         let tempInfo = props.orderInfo;
         tempInfo.vehicleType = 'Sedan';
         props.changeOrderInfo(tempInfo);
@@ -42,7 +42,7 @@ const VehicleSelect = (props: Props) => {
       id: '2',
       title: '4x4',
       onPress: () => {
-        props.changeOrderStatus(props.orderStatuses.services);
+        props.changeOrderStatus(props.orderStatuses.selectServices);
         let tempInfo = props.orderInfo;
         tempInfo.vehicleType = '4x4';
         props.changeOrderInfo(tempInfo);
@@ -52,7 +52,7 @@ const VehicleSelect = (props: Props) => {
       id: '3',
       title: 'Camioneta',
       onPress: () => {
-        props.changeOrderStatus(props.orderStatuses.services);
+        props.changeOrderStatus(props.orderStatuses.selectServices);
         let tempInfo = props.orderInfo;
         tempInfo.vehicleType = 'Camioneta';
         props.changeOrderInfo(tempInfo);

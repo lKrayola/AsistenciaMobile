@@ -11,6 +11,7 @@ interface Props {
   orderInfo: any;
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
+  changeOrderStatus(orderStatus: any): any;
 }
 
 const Gas = (props: Props) => {
@@ -40,7 +41,8 @@ const Gas = (props: Props) => {
       estimatedCost: '0.00$',
     };
     props.changeOrderInfo(tempInfo);
-    props.changeServiceSelected(0);
+    //props.changeOrderStatus(3);
+    props.changeServiceSelected(4);
   };
 
   const modalButtons = [
@@ -79,7 +81,7 @@ const Gas = (props: Props) => {
           alignSelf: 'center',
           marginHorizontal: 10,
         }}>
-          Combustible
+          Combustible  -  1 Galón
         </Text>
       </View>
       <SeparatorModalGrey />
@@ -107,10 +109,11 @@ const Gas = (props: Props) => {
           style={{ fontSize: 20 }}
         >Costo estimado: {props.orderInfo.services.combustible.estimatedCost}</Text>
         <Button
-          title={'Confirmar'}
+          title={'Añadir'}
           titleStyle={{ fontSize: 20 }}
           buttonStyle={serviceSelectStyles.confirmButton}
           onPress={onConfirmPress}
+          disabled={groupButtonIndex !== -1 ? false : true}
         />
       </View>
     </View >
