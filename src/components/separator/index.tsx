@@ -24,7 +24,7 @@ const separatorStyles = StyleSheet.create({
     //paddingHorizontal: 0,
     //justifyContent: 'center',
     width: '100%',
-    height: 5,
+    height: 2,
     borderRadius: 0,
   },
   modalSeparatorWhite: {

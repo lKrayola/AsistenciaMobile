@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Button, Icon, Badge } from 'react-native-elements';
 import { SeparatorModalWhite, SeparatorModalGrey } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -48,14 +47,16 @@ const ServiceSelect = (props: Props) => {
       onPress: () => {
         props.changeServiceSelected(1);
       },
+      color: serviceSelectStyles.buttonLlanta.backgroundColor,
     },
     {
       id: '2',
-      title: ['\n Combustible \n', props.orderInfo.services.combustible.type],
+      title: `Combustible${props.orderInfo.services.combustible.type !== '' ? `\n${props.orderInfo.services.combustible.type}` : ''}`,
       style: serviceSelectStyles.buttonCombustible,
       onPress: () => {
         props.changeServiceSelected(2);
       },
+      color: serviceSelectStyles.buttonCombustible.backgroundColor,
     },
     {
       id: '3',
@@ -64,6 +65,7 @@ const ServiceSelect = (props: Props) => {
       onPress: () => {
         props.changeServiceSelected(3);
       },
+      color: serviceSelectStyles.buttonCorriente.backgroundColor,
     },
     {
       id: '4',
@@ -71,17 +73,52 @@ const ServiceSelect = (props: Props) => {
       style: serviceSelectStyles.buttonRevision,
       onPress: () => {
       },
+      disabled: true,
     },
   ];
 
+  const checkItemAdd = (id: string) => {
+    switch (id) {
+      case '1':
+        if (props.orderInfo.services.cambioDeLlanta.added) {
+          return props.orderInfo.services.combustible.type;
+        }
+        else {
+          return false;
+        }
+      case '2':
+        if (props.orderInfo.services.combustible.added) {
+          return props.orderInfo.services.combustible.type;
+        }
+        else {
+          return false;
+        }
+      case '3':
+        if (props.orderInfo.services.paseCorriente.added) {
+          return '1';
+        } else {
+          return false;
+        }
+      //default:
+    }
+  };
+
   const _renderItem = (item: any) => {
     return (
-      <Button
-        key={item.id}
-        title={item.title}
-        onPress={item.onPress}
-        buttonStyle={[item.style, { borderRadius: 0 }]}
-      />
+      <View>
+        <Button
+          key={item.id}
+          title={item.title}
+          onPress={item.onPress}
+          buttonStyle={[item.style, { borderRadius: 0 }]}
+          disabled={item.disabled}
+        />
+        {(!item.disabled && checkItemAdd(item.id)) ? <Badge value={checkItemAdd(item.id)}
+          containerStyle={{ position: 'absolute', top: '78%', right: '15%', flexGrow: 1 }}
+          badgeStyle={{ backgroundColor: 'white', borderRadius: 2 }}
+          textStyle={{ color: item.color, fontWeight: 'bold' }}
+        /> : null}
+      </View>
     );
   };
 
