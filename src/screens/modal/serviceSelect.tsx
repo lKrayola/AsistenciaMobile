@@ -148,7 +148,7 @@ const ServiceSelect = (props: Props) => {
         {(props.orderInfo.services.cambioDeLlanta.added ||
           props.orderInfo.services.combustible.added ||
           props.orderInfo.services.paseCorriente.added) ?
-          <Button title="Realizar Pedido"
+          <Button title="Realizar Pedido" buttonStyle={{ backgroundColor: '#D13438', alignSelf: 'flex-end' }}
             onPress={() => { props.changeOrderStatus(4); }}
           />
           :
