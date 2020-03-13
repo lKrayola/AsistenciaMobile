@@ -4,7 +4,7 @@
 import React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { Icon, ListItem } from 'react-native-elements';
+import { Icon, ListItem, Tooltip } from 'react-native-elements';
 import { NavigationStateRoute, NavigationScreenProp } from 'react-navigation';
 import { SeparatorModalGrey, SeparatorModalWhite } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
@@ -97,12 +97,16 @@ const VehicleSelect = (props: Props) => {
         <Text style={{ fontSize: 25, alignSelf: 'center', marginHorizontal: 10 }}>
           Tipo de vehículo
         </Text>
-        <Icon type="material"
-          name="info"
-          size={35}
-          //raised={true}
-          onPress={() => { }}
-        />
+        <Tooltip popover={<Text>Sedán: 4x4: Camioneta:</Text>} height={80} backgroundColor={'#24e063'} containerStyle={{ position: 'absolute', top: 270 }}>
+          <View style={{ height: 48, alignSelf: 'stretch', justifyContent: 'center' }}>
+            <Icon type="material"
+              name="info"
+              size={35}
+            //raised={true}
+            //onPress={() => { }}
+            />
+          </View>
+        </Tooltip>
       </View>
       <SeparatorModalWhite />
       <View style={vehicleSelectStyles.flatlistContainerModal}>
