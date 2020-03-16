@@ -6,6 +6,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Button, Icon, Badge } from 'react-native-elements';
 import { SeparatorModalWhite, SeparatorModalGrey } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
+import { NavigationScreenProp, NavigationStateRoute } from 'react-navigation';
 
 interface Props {
   serviceSelected: any;
@@ -14,6 +15,7 @@ interface Props {
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
+  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
 }
 
 const ServiceSelect = (props: Props) => {
@@ -38,6 +40,7 @@ const ServiceSelect = (props: Props) => {
     };
     props.changeOrderInfo(tempInfo);
     props.changeOrderStatus(props.orderStatuses.vehicleType);
+
   };
 
   const modalButtons = [
@@ -77,6 +80,11 @@ const ServiceSelect = (props: Props) => {
       disabled: true,
     },
   ];
+
+  const onPressConfirm = () => {
+    props.changeOrderStatus(4);
+    props.navigation.navigate('OrderReview');
+  };
 
   const checkItemAdd = (id: string) => {
     switch (id) {
@@ -148,8 +156,8 @@ const ServiceSelect = (props: Props) => {
         {(props.orderInfo.services.cambioDeLlanta.added ||
           props.orderInfo.services.combustible.added ||
           props.orderInfo.services.paseCorriente.added) ?
-          <Button title="Realizar Pedido" buttonStyle={{ backgroundColor: '#D13438', alignSelf: 'flex-end' }}
-            onPress={() => { props.changeOrderStatus(4); }}
+          <Button title="Confirmar" buttonStyle={{ backgroundColor: '#D13438', alignSelf: 'flex-end' }}
+            onPress={onPressConfirm}
           />
           :
           null

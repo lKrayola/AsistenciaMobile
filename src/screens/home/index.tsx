@@ -155,6 +155,7 @@ const Home = (props: Props) => {
           changeOrderStatus={changeOrderStatus}
           orderInfo={orderInfo}
           changeOrderInfo={changeOrderInfo}
+          navigation={props.navigation}
         />
       </SafeAreaView>
     </>

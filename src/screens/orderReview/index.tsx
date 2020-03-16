@@ -7,7 +7,7 @@ import {
   Text,
 } from 'react-native';
 
-const TestScreen = () => {
+const OrderReview = () => {
 
   return (
     <>
@@ -15,11 +15,11 @@ const TestScreen = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
         >
-          <Text>Pantalla 2</Text>
+          <Text>Order Review</Text>
         </ScrollView>
       </SafeAreaView>
     </>
   );
 };
 
-export default TestScreen;
+export default OrderReview;
