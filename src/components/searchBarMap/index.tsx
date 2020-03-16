@@ -8,11 +8,7 @@ import { SearchBar } from 'react-native-elements';
 import { View } from 'react-native';
 import { DrawerActions } from '@react-navigation/native';
 
-interface Props {
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
-}
-
-const SearchBarHome = (props: Props) => {
+const SearchBarHome = () => {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -63,7 +59,7 @@ const SearchBarHome = (props: Props) => {
           name: 'menu',
           disabled: true,
           size: 40,
-          onPress: () => { props.navigation.toggleDrawer(); },
+          onPress: () => { /*props.navigation.toggleDrawer(); */ },
         }}
         cancelIcon={{
           type: 'material',

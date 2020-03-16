@@ -1,20 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { NavigationScreenProp, NavigationStateRoute } from 'react-navigation';
 
 interface Props {
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
-  bottomSheetOpen: boolean
+  modalOpen: boolean
 }
 
 const Map = (props: Props) => {
 
   let currentStyle;
-  if (props.bottomSheetOpen) {
+  if (props.modalOpen) {
     currentStyle = mapStyles.sheetOpen;
   } else {
     currentStyle = mapStyles.sheetClosed;
@@ -50,7 +46,7 @@ const mapStyles = StyleSheet.create({
     alignSelf: 'center',
   },
   sheetOpen: {
-    height: '60%',
+    height: '50%',
   },
   sheetClosed: {
     height: '100%',
