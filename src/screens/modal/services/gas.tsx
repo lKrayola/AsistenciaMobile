@@ -16,7 +16,12 @@ interface Props {
 
 const Gas = (props: Props) => {
   const [groupButtonIndex, setGroupButtonIndex] = useState(-1);
-  const groupButton = ['91', '95', 'Diesel'];
+  let groupButton: any[];
+  {
+    props.orderInfo.vehicleType === 'Sedan' ?
+      groupButton = ['91', '95'] :
+      groupButton = ['91', '95', 'Diesel'];
+  }
 
   useEffect(() => {
     console.log('Group Button Index', groupButtonIndex);
