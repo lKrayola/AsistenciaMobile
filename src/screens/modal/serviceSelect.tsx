@@ -6,16 +6,17 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Button, Icon, Badge } from 'react-native-elements';
 import { SeparatorModalWhite, SeparatorModalGrey } from '../../components/separator';
 import { FlatList } from 'react-native-gesture-handler';
-import { NavigationScreenProp, NavigationStateRoute } from 'react-navigation';
 
 interface Props {
   serviceSelected: any;
   orderInfo: any;
+  orderStatus: any;
   orderStatuses: any;
+  setModalOpen(open: boolean): any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
+  navigation: any;
 }
 
 const ServiceSelect = (props: Props) => {
@@ -83,7 +84,12 @@ const ServiceSelect = (props: Props) => {
 
   const onPressConfirm = () => {
     props.changeOrderStatus(4);
-    props.navigation.navigate('OrderReview');
+    props.navigation.navigate('OrderReview', {
+      orderInfo: props.orderInfo,
+      changeOrderStatus: props.changeOrderStatus,
+      orderStatus: props.orderStatus,
+      setModalOpen: props.setModalOpen,
+    });
   };
 
   const checkItemAdd = (id: string) => {

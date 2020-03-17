@@ -9,7 +9,6 @@ import ServiceSelect from '../../screens/modal/serviceSelect';
 import Tire from '../../screens/modal/services/tire';
 import Gas from '../../screens/modal/services/gas';
 import Power from '../../screens/modal/services/power';
-import { NavigationScreenProp, NavigationStateRoute } from 'react-navigation';
 
 interface Props {
   open: boolean;
@@ -19,7 +18,7 @@ interface Props {
   onModalClosed(open: boolean): any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
+  navigation: any;
 }
 
 const ModalBottom = (props: Props) => {
@@ -54,6 +53,10 @@ const ModalBottom = (props: Props) => {
     await setServiceSelected(service);
   };
 
+  const setModalOpen = async (open: boolean) => {
+    setModalOpen(open);
+  };
+
   return (
     <Modal
       isOpen={open}
@@ -83,6 +86,8 @@ const ModalBottom = (props: Props) => {
           orderStatuses={props.orderStatuses}
           changeOrderInfo={props.changeOrderInfo}
           changeServiceSelected={changeServiceSelected}
+          setModalOpen={setModalOpen}
+          orderStatus={props.orderStatus}
           navigation={props.navigation}
         /> : null}
       {(props.orderStatus == props.orderStatuses.selectServices) &&

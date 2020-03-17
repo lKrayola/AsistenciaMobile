@@ -4,11 +4,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import DrawerComp from './src/components/drawer';
 import RootStackNavigator from './src/components/navigation/rootStack';
-//<DrawerComp />
-//<RootStackNavigator />
-
 
 type Props = {};
 
