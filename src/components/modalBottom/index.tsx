@@ -54,7 +54,12 @@ const ModalBottom = (props: Props) => {
   };
 
   const setModalOpen = async (open: boolean) => {
-    setModalOpen(open);
+    setOpen(open);
+  };
+
+  const onReviewGoBack = () => {
+    setModalOpen(true);
+    props.changeOrderStatus(2);
   };
 
   return (
@@ -80,13 +85,12 @@ const ModalBottom = (props: Props) => {
       {(props.orderStatus == props.orderStatuses.selectServices) &&
         (serviceSelected == ServiceAdd.none || serviceSelected == ServiceAdd.any) ?
         <ServiceSelect
-          serviceSelected={serviceSelected}
           changeOrderStatus={props.changeOrderStatus}
           orderInfo={props.orderInfo}
           orderStatuses={props.orderStatuses}
           changeOrderInfo={props.changeOrderInfo}
           changeServiceSelected={changeServiceSelected}
-          setModalOpen={setModalOpen}
+          onReviewGoBack={onReviewGoBack}
           orderStatus={props.orderStatus}
           navigation={props.navigation}
         /> : null}

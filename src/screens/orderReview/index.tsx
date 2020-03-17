@@ -15,12 +15,11 @@ type Props = {
 const OrderReview = ({ route, navigation }: any) => {
   console.log('ESTADO NAVIGATION', navigation)
   console.log('ESTADO route', route.params)
-  console.log(route.params.orderStatus)
+  //console.log(route.params.orderStatus)
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', () => {
-      route.params.changeOrderStatus(2);
-      route.params.setModalOpen(true);
+      route.params.onReviewGoBack();
     })
   }, [])
 

@@ -8,14 +8,13 @@ import { SeparatorModalWhite, SeparatorModalGrey } from '../../components/separa
 import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
-  serviceSelected: any;
   orderInfo: any;
   orderStatus: any;
   orderStatuses: any;
-  setModalOpen(open: boolean): any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
+  onReviewGoBack(): any;
   navigation: any;
 }
 
@@ -83,12 +82,9 @@ const ServiceSelect = (props: Props) => {
   ];
 
   const onPressConfirm = () => {
-    props.changeOrderStatus(4);
+    props.changeOrderStatus(3);
     props.navigation.navigate('OrderReview', {
-      orderInfo: props.orderInfo,
-      changeOrderStatus: props.changeOrderStatus,
-      orderStatus: props.orderStatus,
-      setModalOpen: props.setModalOpen,
+      onReviewGoBack: props.onReviewGoBack,
     });
   };
 

@@ -17,7 +17,7 @@ import SearchBarHome from '../../components/searchBarMap';
 const Home = ({ navigation }: any) => {
   enum OrderStatus {
     location, vehicleType, selectServices,
-    added, review, waiting,
+    review, waiting,
     completed, canceled
   }
   const [modalOpen, setModalOpen] = useState(false);
