@@ -85,6 +85,7 @@ const ServiceSelect = (props: Props) => {
     props.changeOrderStatus(3);
     props.navigation.navigate('OrderReview', {
       onReviewGoBack: props.onReviewGoBack,
+      orderInfo: props.orderInfo,
     });
   };
 
