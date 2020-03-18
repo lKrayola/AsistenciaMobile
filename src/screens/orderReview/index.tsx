@@ -9,30 +9,56 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-
-type Props = {
-  //navigation: any;
-}
+import { Button, Icon } from 'react-native-elements';
+import { SeparatorModalGrey } from '../../components/separator';
 
 const OrderReview = ({ route, navigation }: any) => {
   console.log('ESTADO NAVIGATION', navigation)
   console.log('ESTADO route', route.params)
-  //console.log(route.params.orderStatus)
   const orderInfo = route.params.orderInfo;
+
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', () => {
       route.params.onReviewGoBack();
     })
   }, [])
 
+  const onBackPress = () => {
+    route.params.onReviewGoBack();
+    navigation.goBack();
+  }
+
   return (
     <>
-      <SafeAreaView style={{ justifyContent: 'space-around', alignItems: 'center' }}>
+      <SafeAreaView style={{
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderColor: 'yellow',
+        flex: 1,
+        flexDirection: "column",
+      }}>
+        <View
+          style={{
+            width: '100%',
+            padding: 10,
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+          }}>
+          <View style={{ marginLeft: 10 }}>
+            <Icon type="material"
+              name="keyboard-backspace"
+              size={40}
+              onPress={onBackPress}
+            />
+          </View>
+          <Text style={{ fontSize: 28, alignSelf: 'center', marginHorizontal: 10 }}>
+            Revision del pedido
+        </Text>
+        </View>
+        <SeparatorModalGrey />
         <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
         >
           <View style={serviceSelectStyles.sectionContainerModal}>
-            <Text>Revision de Pedido</Text>
             <Text>Tipo de vehiculo: {orderInfo.vehicleType}</Text>
             <Text>Servicios: </Text>
             {orderInfo.services.cambioDeLlanta.added ?
@@ -49,9 +75,19 @@ const OrderReview = ({ route, navigation }: any) => {
               <Text>Pase de corriente: {orderInfo.services.paseCorriente.estimatedCost} </Text> :
               null
             }
-            <Text>Total:</Text>
+            <Text>Total: {}</Text>
           </View>
         </ScrollView>
+        <Button
+          title='Realizar Pedido'
+          titleStyle={{ fontSize: 28 }}
+          buttonStyle={{
+            width: 415,
+            height: 75,
+            borderRadius: 0,
+          }}
+          disabled={true}
+        />
       </SafeAreaView>
     </>
   );
@@ -60,14 +96,15 @@ const OrderReview = ({ route, navigation }: any) => {
 const serviceSelectStyles = StyleSheet.create({
   sectionContainerModal: {
     flexDirection: 'column',
-    marginVertical: 10,
+    //marginVertical: 10,
     alignItems: 'center',
-    flex: 1,
-    marginHorizontal: 20,
+    flex: 2,
+    //marginHorizontal: 20,
     width: '100%',
     height: '100%',
     borderWidth: 2,
     borderColor: 'blue',
+    fontSize: 26,
   },
 });
 
