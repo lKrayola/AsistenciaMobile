@@ -52,59 +52,95 @@ const OrderReview = ({ route, navigation }: any) => {
             />
           </View>
           <Text style={{ fontSize: 28, alignSelf: 'center', marginHorizontal: 10 }}>
-            Revision del pedido
+            Resumen del pedido
         </Text>
         </View>
         <SeparatorModalGrey />
         <ScrollView
+          contentContainerStyle={{ justifyContent: 'space-around', alignItems: "center" }}
         >
-          <View style={serviceSelectStyles.sectionContainerModal}>
-            <Text>Tipo de vehiculo: {orderInfo.vehicleType}</Text>
-            <Text>Servicios: </Text>
+          <View style={orderReviewStyles.vehicleTypeStyle}>
+            <Text
+              style={{ fontSize: 20 }}
+            >Tipo de vehiculo:</Text>
+            <View style={{ width: 200 }}>
+              <Text
+                style={{ fontSize: 20, alignSelf: "center" }}
+              >{orderInfo.vehicleType}</Text>
+            </View>
+          </View>
+          <View style={orderReviewStyles.serviceStyle}>
+            <Text
+              style={{ fontSize: 20 }}
+            >Servicios: </Text>
             {orderInfo.services.cambioDeLlanta.added ?
-              <Text>Cambio de Llanta: {orderInfo.services.cambioDeLlanta.estimatedCost} </Text> :
+              <Text style={{ fontSize: 15 }}
+              >
+                Cambio de Llanta: {orderInfo.services.cambioDeLlanta.estimatedCost}
+              </Text>
+              :
               null
             }
             {orderInfo.services.combustible.added ?
-              <Text>Combustible: {orderInfo.services.combustible.estimatedCost}
-              Tipo: {orderInfo.services.combustible.type}
+              <Text style={{ fontSize: 15 }}
+              >Combustible ({orderInfo.services.combustible.type}): {orderInfo.services.combustible.estimatedCost}
               </Text> :
               null
             }
             {orderInfo.services.paseCorriente.added ?
-              <Text>Pase de corriente: {orderInfo.services.paseCorriente.estimatedCost} </Text> :
+              <Text style={{ fontSize: 15 }}
+              >
+                Pase de corriente: {orderInfo.services.paseCorriente.estimatedCost}
+              </Text> :
               null
             }
-            <Text>Total: {}</Text>
           </View>
+          <Text style={{ fontSize: 25, alignSelf: "center" }}
+          >Total: {orderInfo.total}</Text>
         </ScrollView>
         <Button
           title='Realizar Pedido'
           titleStyle={{ fontSize: 28 }}
-          buttonStyle={{
-            width: 415,
-            height: 75,
-            borderRadius: 0,
-          }}
-          disabled={true}
+          buttonStyle={orderReviewStyles.buttonStyle}
+          disabled={false}
         />
       </SafeAreaView>
     </>
   );
 };
 
-const serviceSelectStyles = StyleSheet.create({
-  sectionContainerModal: {
-    flexDirection: 'column',
-    //marginVertical: 10,
-    alignItems: 'center',
-    flex: 2,
+const orderReviewStyles = StyleSheet.create({
+  vehicleTypeStyle: {
+    flexDirection: 'row',
+    marginTop: 25,
+    alignItems: "baseline",
+    flex: 1,
+    padding: 10,
     //marginHorizontal: 20,
-    width: '100%',
+    width: 370,
     height: '100%',
     borderWidth: 2,
-    borderColor: 'blue',
+    borderColor: 'black',
     fontSize: 26,
+  },
+  serviceStyle: {
+    flexDirection: 'column',
+    marginVertical: 25,
+    alignItems: "baseline",
+    flex: 1,
+    padding: 10,
+    //marginHorizontal: 20,
+    width: 370,
+    height: '100%',
+    borderWidth: 2,
+    borderColor: 'black',
+    fontSize: 26,
+  },
+  buttonStyle: {
+    backgroundColor: '#D13438',
+    width: 415,
+    height: 75,
+    borderRadius: 0,
   },
 });
 
