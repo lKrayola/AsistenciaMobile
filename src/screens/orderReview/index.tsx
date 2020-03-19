@@ -28,6 +28,10 @@ const OrderReview = ({ route, navigation }: any) => {
     navigation.goBack();
   }
 
+  const onPressTerms = () => {
+    navigation.navigate('Terms')
+  };
+
   return (
     <>
       <SafeAreaView style={{
@@ -98,6 +102,16 @@ const OrderReview = ({ route, navigation }: any) => {
           <Text style={{ fontSize: 25, alignSelf: "center" }}
           >Total: {orderInfo.total}</Text>
         </ScrollView>
+        <View
+          style={{ justifyContent: "center", paddingVertical: 10, paddingHorizontal: 10 }}
+        >
+          <Text
+            onPress={onPressTerms}
+            style={{ fontSize: 15, textDecorationLine: 'underline' }}
+          >
+            Al realizar un pedido aceptas nuestros Terminos y Condiciones de uso.
+        </Text>
+        </View>
         <Button
           title='Realizar Pedido'
           titleStyle={{ fontSize: 28 }}
