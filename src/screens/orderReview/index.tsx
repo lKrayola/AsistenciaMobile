@@ -40,6 +40,7 @@ const OrderReview = ({ route, navigation }: any) => {
         borderColor: 'yellow',
         flex: 1,
         flexDirection: "column",
+        width: '100%'
       }}>
         <View
           style={{
@@ -57,11 +58,11 @@ const OrderReview = ({ route, navigation }: any) => {
           </View>
           <Text style={{ fontSize: 28, alignSelf: 'center', marginHorizontal: 10 }}>
             Resumen del pedido
-        </Text>
+          </Text>
         </View>
         <SeparatorModalGrey />
         <ScrollView
-          contentContainerStyle={{ justifyContent: 'space-around', alignItems: "center" }}
+          contentContainerStyle={{ justifyContent: 'space-around', alignItems: "center", flexGrow: 1, width: '100%' }}
         >
           <View style={orderReviewStyles.vehicleTypeStyle}>
             <Text
@@ -99,8 +100,12 @@ const OrderReview = ({ route, navigation }: any) => {
               null
             }
           </View>
-          <Text style={{ fontSize: 25, alignSelf: "center" }}
-          >Total: {orderInfo.total}</Text>
+          <View>
+            <Text style={{ fontSize: 25 }}
+            >
+              Total: {orderInfo.total}
+            </Text>
+          </View>
         </ScrollView>
         <View
           style={{ justifyContent: "center", paddingVertical: 10, paddingHorizontal: 10 }}
@@ -128,24 +133,25 @@ const orderReviewStyles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 25,
     alignItems: "baseline",
-    flex: 1,
+    //flex: 1,
     padding: 10,
     //marginHorizontal: 20,
     width: 370,
-    height: '100%',
+    height: '10%',
     borderWidth: 2,
     borderColor: 'black',
     fontSize: 26,
   },
   serviceStyle: {
     flexDirection: 'column',
-    marginVertical: 25,
+    marginTop: 20,
+    marginBottom: 10,
     alignItems: "baseline",
-    flex: 1,
+    flex: 10,
     padding: 10,
     //marginHorizontal: 20,
     width: 370,
-    height: '100%',
+    //height: '50%',
     borderWidth: 2,
     borderColor: 'black',
     fontSize: 26,
