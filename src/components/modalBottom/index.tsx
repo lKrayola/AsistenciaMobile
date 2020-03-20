@@ -18,6 +18,7 @@ interface Props {
   onModalClosed(open: boolean): any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
+  navigation: any;
 }
 
 const ModalBottom = (props: Props) => {
@@ -52,6 +53,15 @@ const ModalBottom = (props: Props) => {
     await setServiceSelected(service);
   };
 
+  const setModalOpen = async (open: boolean) => {
+    setOpen(open);
+  };
+
+  const onReviewGoBack = () => {
+    setModalOpen(true);
+    props.changeOrderStatus(2);
+  };
+
   return (
     <Modal
       isOpen={open}
@@ -75,12 +85,14 @@ const ModalBottom = (props: Props) => {
       {(props.orderStatus == props.orderStatuses.selectServices) &&
         (serviceSelected == ServiceAdd.none || serviceSelected == ServiceAdd.any) ?
         <ServiceSelect
-          serviceSelected={serviceSelected}
           changeOrderStatus={props.changeOrderStatus}
           orderInfo={props.orderInfo}
           orderStatuses={props.orderStatuses}
           changeOrderInfo={props.changeOrderInfo}
           changeServiceSelected={changeServiceSelected}
+          onReviewGoBack={onReviewGoBack}
+          orderStatus={props.orderStatus}
+          navigation={props.navigation}
         /> : null}
       {(props.orderStatus == props.orderStatuses.selectServices) &&
         serviceSelected == ServiceAdd.tire ?

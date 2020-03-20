@@ -11,18 +11,13 @@ import {
 import { check, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import { Button } from 'react-native-elements';
 import Map from '../../components/map/index';
-import { NavigationScreenProp, NavigationStateRoute } from 'react-navigation';
 import ModalBottom from '../../components/modalBottom';
 import SearchBarHome from '../../components/searchBarMap';
 
-interface Props {
-  navigation: NavigationScreenProp<NavigationStateRoute<any>>;
-}
-
-const Home = (props: Props) => {
+const Home = ({ navigation }: any) => {
   enum OrderStatus {
     location, vehicleType, selectServices,
-    added, review, waiting,
+    review, waiting,
     completed, canceled
   }
   const [modalOpen, setModalOpen] = useState(false);
@@ -155,6 +150,7 @@ const Home = (props: Props) => {
           changeOrderStatus={changeOrderStatus}
           orderInfo={orderInfo}
           changeOrderInfo={changeOrderInfo}
+          navigation={navigation}
         />
       </SafeAreaView>
     </>

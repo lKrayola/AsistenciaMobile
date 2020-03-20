@@ -8,12 +8,14 @@ import { SeparatorModalWhite, SeparatorModalGrey } from '../../components/separa
 import { FlatList } from 'react-native-gesture-handler';
 
 interface Props {
-  serviceSelected: any;
   orderInfo: any;
+  orderStatus: any;
   orderStatuses: any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
+  onReviewGoBack(): any;
+  navigation: any;
 }
 
 const ServiceSelect = (props: Props) => {
@@ -38,6 +40,7 @@ const ServiceSelect = (props: Props) => {
     };
     props.changeOrderInfo(tempInfo);
     props.changeOrderStatus(props.orderStatuses.vehicleType);
+
   };
 
   const modalButtons = [
@@ -77,6 +80,14 @@ const ServiceSelect = (props: Props) => {
       disabled: true,
     },
   ];
+
+  const onPressConfirm = () => {
+    props.changeOrderStatus(3);
+    props.navigation.navigate('OrderReview', {
+      onReviewGoBack: props.onReviewGoBack,
+      orderInfo: props.orderInfo,
+    });
+  };
 
   const checkItemAdd = (id: string) => {
     switch (id) {
@@ -148,8 +159,8 @@ const ServiceSelect = (props: Props) => {
         {(props.orderInfo.services.cambioDeLlanta.added ||
           props.orderInfo.services.combustible.added ||
           props.orderInfo.services.paseCorriente.added) ?
-          <Button title="Realizar Pedido" buttonStyle={{ backgroundColor: '#D13438', alignSelf: 'flex-end' }}
-            onPress={() => { props.changeOrderStatus(4); }}
+          <Button title="Confirmar" buttonStyle={{ backgroundColor: '#D13438', alignSelf: 'flex-end' }}
+            onPress={onPressConfirm}
           />
           :
           null
