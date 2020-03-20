@@ -122,6 +122,10 @@ const OrderReview = ({ route, navigation }: any) => {
           titleStyle={{ fontSize: 28 }}
           buttonStyle={orderReviewStyles.buttonStyle}
           disabled={false}
+          onPress={() => {
+            route.params.onReviewConfirm();
+            navigation.goBack();
+          }}
         />
       </SafeAreaView>
     </>

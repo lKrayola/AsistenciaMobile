@@ -15,6 +15,7 @@ interface Props {
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
   onReviewGoBack(): any;
+  onReviewConfirm(): any;
   navigation: any;
 }
 
@@ -86,6 +87,7 @@ const ServiceSelect = (props: Props) => {
     props.navigation.navigate('OrderReview', {
       onReviewGoBack: props.onReviewGoBack,
       orderInfo: props.orderInfo,
+      onReviewConfirm: props.onReviewConfirm,
     });
   };
 

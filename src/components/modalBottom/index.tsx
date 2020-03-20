@@ -9,6 +9,7 @@ import ServiceSelect from '../../screens/modal/serviceSelect';
 import Tire from '../../screens/modal/services/tire';
 import Gas from '../../screens/modal/services/gas';
 import Power from '../../screens/modal/services/power';
+import AwaitingArrival from '../../screens/modal/awaitingArrival';
 
 interface Props {
   open: boolean;
@@ -62,6 +63,11 @@ const ModalBottom = (props: Props) => {
     props.changeOrderStatus(2);
   };
 
+  const onReviewConfirm = () => {
+    setModalOpen(true);
+    props.changeOrderStatus(4);
+  };
+
   return (
     <Modal
       isOpen={open}
@@ -91,6 +97,7 @@ const ModalBottom = (props: Props) => {
           changeOrderInfo={props.changeOrderInfo}
           changeServiceSelected={changeServiceSelected}
           onReviewGoBack={onReviewGoBack}
+          onReviewConfirm={onReviewConfirm}
           orderStatus={props.orderStatus}
           navigation={props.navigation}
         /> : null}
@@ -119,8 +126,14 @@ const ModalBottom = (props: Props) => {
           changeServiceSelected={changeServiceSelected}
         /> : null}
       {/*props.orderStatus === props.orderStatuses.added ? null : null*/}
-      {props.orderStatus == props.orderStatuses.review ? null : null}
-      {props.orderStatus == props.orderStatuses.waiting ? null : null}
+      {props.orderStatus == props.orderStatuses.review ?
+        null : null}
+      {props.orderStatus == props.orderStatuses.waiting ?
+        <AwaitingArrival
+          orderInfo={props.orderInfo}
+          changeOrderStatus={props.changeOrderStatus}
+          changeOrderInfo={props.changeOrderInfo}
+        /> : null}
       {props.orderStatus == props.orderStatuses.completed ? null : null}
       {props.orderStatus == props.orderStatuses.canceled ? null : null}
     </Modal>
