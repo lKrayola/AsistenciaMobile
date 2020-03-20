@@ -7,17 +7,17 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
-  BackHandler,
   StyleSheet,
   View,
 } from 'react-native';
 
 import { Button, Icon } from 'react-native-elements';
+import { termsText } from '../../components/termsText/';
 
 const Terms = ({ navigation }: any) => {
 
   const onBackPress = () => {
-    navigation.goback();
+    navigation.goBack();
   };
 
   return (
@@ -27,6 +27,7 @@ const Terms = ({ navigation }: any) => {
       borderColor: 'yellow',
       flex: 1,
       flexDirection: "column",
+      paddingBottom: 10,
     }}>
       <View
         style={{
@@ -40,33 +41,38 @@ const Terms = ({ navigation }: any) => {
             name="keyboard-backspace"
             size={40}
             onPress={onBackPress}
-            disabled={true}
+            disabled={false}
           />
         </View>
         <Text style={{ fontSize: 28, alignSelf: 'center', marginHorizontal: 10 }}>
-          Texto
+          Terminos y Condiciones
         </Text>
       </View>
-      <ScrollView
-        contentContainerStyle={{
-          justifyContent: 'space-around',
-          alignItems: "center",
-          borderWidth: 3,
-          flex: 1,
-        }}
-      >
-        <View style={termStyles.detailStyle}>
+      <View style={termStyles.detailStyle}>
+        <ScrollView
+          contentContainerStyle={{
+            justifyContent: 'space-around',
+            //alignItems: "center",
+            //borderWidth: 3,
+            flexGrow: 1,
+          }}
+        >
           <Text
-            style={{ fontSize: 20 }}
-          >Tipo de vehiculo:</Text>
-        </View>
-      </ScrollView>
-      <Button
-        title='Acepto y he leido los Terminos y Condiciones'
-        titleStyle={{ fontSize: 22 }}
-        buttonStyle={termStyles.buttonStyle}
-        disabled={false}
-      />
+            style={{ fontSize: 18 }}
+          >Tipo de vehiculo:
+          {termsText}
+          </Text>
+        </ScrollView>
+      </View>
+      <View style={{ justifyContent: "center", alignContent: "center", alignItems: "center" }}>
+        <Button
+          title='Acepto y he leido los Terminos y Condiciones'
+          titleStyle={{ fontSize: 18, alignSelf: "center" }}
+          buttonStyle={termStyles.buttonStyle}
+          onPress={onBackPress}
+          disabled={false}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -80,7 +86,7 @@ const termStyles = StyleSheet.create({
     flex: 1,
     padding: 10,
     //marginHorizontal: 20,
-    width: 370,
+    width: '95%',
     height: '100%',
     borderWidth: 2,
     borderColor: 'black',
@@ -88,9 +94,9 @@ const termStyles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: '#D13438',
-    width: 415,
+    width: '80%',
     height: 75,
-    borderRadius: 0,
+    borderRadius: 10,
   },
 });
 export default Terms;
