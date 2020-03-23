@@ -1,9 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-
 import React from 'react';
-
 import { StyleSheet, View, Text } from 'react-native';
 import { Icon, Tooltip, Button } from 'react-native-elements';
 import { SeparatorModalGrey, SeparatorModalWhite } from '../../components/separator';
@@ -12,9 +10,45 @@ interface Props {
   orderInfo: any;
   changeOrderStatus(orderStatus: any): any;
   changeOrderInfo(orderInfo: any): any;
+  onModalClosed(open: boolean): any;
 }
 
 const AwaitingArrival = (props: Props) => {
+
+  const undoOrderInfo = () => {
+    let tempInfo = props.orderInfo;
+    tempInfo = {
+      userId: '',
+      orderId: '',
+      vehicleType: '',
+      location: '',
+      date: '',
+      services: {
+        cambioDeLlanta: {
+          added: false,
+          qty: 0,
+          estimatedCost: '0.00$',
+        },
+        combustible: {
+          added: false,
+          type: '',
+          estimatedCost: '0.00$',
+        },
+        paseCorriente: {
+          added: false,
+          estimatedCost: '0.00$',
+        },
+      },
+      subTotal: '0.00$',
+      total: '0.00$',
+      orderConfirmed: false,
+      orderCanceled: false,
+      orderCompleted: false,
+    }
+    props.changeOrderInfo(tempInfo);
+    props.changeOrderStatus(0);
+    props.onModalClosed(false);
+  };
 
   return (
     <View style={awaitingArrivalStyles.sectionContainerModal}>
@@ -47,9 +81,16 @@ const AwaitingArrival = (props: Props) => {
         <Text>
           El motorizado ya esta en camino a brindarle asistencia
         </Text>
-        <Button
-          title='Cancelar'
-        />
+        <View style={{ borderRadius: 10, borderWidth: 1, flex: 1, margin: 10, width: '90%' }}>
+
+        </View>
+        <View>
+          <Button
+            title='Cancelar'
+            buttonStyle={{ backgroundColor: '#D13438', width: '80%', alignSelf: 'center', borderRadius: 0 }}
+            onPress={undoOrderInfo}
+          />
+        </View>
       </View>
     </View>
   );

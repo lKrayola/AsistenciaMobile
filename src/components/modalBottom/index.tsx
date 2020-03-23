@@ -133,6 +133,7 @@ const ModalBottom = (props: Props) => {
           orderInfo={props.orderInfo}
           changeOrderStatus={props.changeOrderStatus}
           changeOrderInfo={props.changeOrderInfo}
+          onModalClosed={props.onModalClosed}
         /> : null}
       {props.orderStatus == props.orderStatuses.completed ? null : null}
       {props.orderStatus == props.orderStatuses.canceled ? null : null}
