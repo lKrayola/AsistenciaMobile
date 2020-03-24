@@ -39,6 +39,7 @@ const AwaitingArrival = (props: Props) => {
           estimatedCost: '0.00$',
         },
       },
+      employeeId: '',
       subTotal: '0.00$',
       total: '0.00$',
       orderConfirmed: false,
@@ -73,7 +74,10 @@ const AwaitingArrival = (props: Props) => {
         <Text>
           El motorizado ya esta en camino a brindarle asistencia
         </Text>
-        <View style={awaitingArrivalStyles.cardView} />
+        <View style={awaitingArrivalStyles.cardView}>
+          <Text>Nombre del tecnico: Juan Perez</Text>
+          <Text>Numero de placa: 123415</Text>
+        </View>
         <View>
           <Button
             title='Cancelar'

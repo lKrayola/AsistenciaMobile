@@ -45,6 +45,7 @@ const Home = ({ navigation }: any) => {
         estimatedCost: '0.00$',
       },
     },
+    employeeId: '',
     subTotal: '0.00$',
     total: '0.00$',
     orderConfirmed: false,
