@@ -65,7 +65,7 @@ const VehicleSelect = (props: Props) => {
       <ListItem
         key={item.id}
         title={item.title}
-        titleStyle={{ fontSize: 22, marginLeft: 15 }}
+        titleStyle={vehicleSelectStyles.listItemTitle}
         onPress={item.onPress}
         chevron={<Icon type="material"
           name="chevron-right"
@@ -78,38 +78,32 @@ const VehicleSelect = (props: Props) => {
   return (
     <View style={vehicleSelectStyles.sectionContainerModal}>
       <View
-        style={{
-          //borderWidth: 0,
-          //borderColor: 'yellow',
-          width: '100%',
-          paddingBottom: 5,
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-        <View style={{ marginLeft: 10 }}>
+        style={vehicleSelectStyles.headerView}>
+        <View style={vehicleSelectStyles.backButtonView}>
           <Icon type="material"
             name="keyboard-backspace"
             size={40}
-            //raised={true}
             onPress={undoOrderInfo}
           />
         </View>
-        <Text style={{ fontSize: 25, alignSelf: 'center', marginHorizontal: 10 }}>
+        <Text style={vehicleSelectStyles.headerText}>
           Tipo de vehículo
         </Text>
-        <Tooltip popover={<Text>Sedán: 4x4: Camioneta:</Text>} height={80} backgroundColor={'#24e063'} containerStyle={{ position: 'absolute', top: 270 }}>
-          <View style={{ height: 48, alignSelf: 'stretch', justifyContent: 'center' }}>
+        <Tooltip
+          popover={<Text>Sedán: 4x4: Camioneta:</Text>}
+          height={80} backgroundColor={'#24e063'}
+          containerStyle={vehicleSelectStyles.tooltipContainer}
+        >
+          <View style={vehicleSelectStyles.tooltipView}>
             <Icon type="material"
               name="info"
               size={35}
-            //raised={true}
-            //onPress={() => { }}
             />
           </View>
         </Tooltip>
       </View>
       <SeparatorModalWhite />
-      <View style={vehicleSelectStyles.flatlistContainerModal}>
+      <View style={vehicleSelectStyles.flatlistView}>
         <SeparatorModalGrey />
         <FlatList
           data={modalButtons}
@@ -117,7 +111,7 @@ const VehicleSelect = (props: Props) => {
           keyExtractor={(item: any) => item.id}
           renderItem={({ item }: any) => _renderItem(item)}
           onEndReachedThreshold={0.5}
-          style={{ width: '100%' }}
+          style={vehicleSelectStyles.flatlist}
         />
       </View>
     </View>
@@ -133,10 +127,9 @@ const vehicleSelectStyles = StyleSheet.create({
     marginHorizontal: 20,
     width: '100%',
     height: '100%',
-    //borderWidth: 2,
     borderColor: 'blue',
   },
-  flatlistContainerModal: {
+  flatlistView: {
     flexDirection: 'column',
     marginVertical: 1,
     alignItems: 'center',
@@ -144,9 +137,35 @@ const vehicleSelectStyles = StyleSheet.create({
     marginHorizontal: 20,
     width: '100%',
     height: '100%',
-    //borderWidth: 3,
     borderColor: 'black',
   },
+  listItemTitle: {
+    fontSize: 22,
+    marginLeft: 15
+  },
+  headerView: {
+    width: '100%',
+    paddingBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backButtonView: {
+    marginLeft: 10
+  },
+  headerText: {
+    fontSize: 25,
+    alignSelf: 'center',
+    marginHorizontal: 10
+  },
+  tooltipContainer: {
+    position: 'absolute', top: 270
+  },
+  tooltipView: {
+    height: 48,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  flatlist: { width: '100%' },
 });
 
 export default VehicleSelect;

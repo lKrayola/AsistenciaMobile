@@ -1,12 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-
 import React, { useState, useEffect } from 'react';
-import { NavigationScreenProp, NavigationStateRoute } from 'react-navigation';
 import { SearchBar } from 'react-native-elements';
-import { View } from 'react-native';
-import { DrawerActions } from '@react-navigation/native';
+import { View, StyleSheet } from 'react-native';
 
 const SearchBarHome = () => {
   const [search, setSearch] = useState('');
@@ -23,24 +20,14 @@ const SearchBarHome = () => {
     console.log(search);
   }, [search]);
   return (
-    <View style={{
-      position: 'absolute',
-      top: '5%',
-      width: '92%',
-      alignSelf: 'center',
-    }}>
+    <View style={searchBarStyles.searchBarView}>
       <SearchBar
-        containerStyle={{
-          borderRadius: 10,
-          backgroundColor: '#FFFFFF',
-        }}
+        containerStyle={searchBarStyles.container}
         inputContainerStyle={{
-          //borderRadius: 10,
           backgroundColor: '#FFFFFF',
         }}
         leftIconContainerStyle={{
           alignSelf: 'center',
-          //marginLeft: 25,
         }}
         placeholder="¿Donde se encuentra?"
         onChangeText={(value) => updateSearch(value)}
@@ -51,13 +38,12 @@ const SearchBarHome = () => {
           color: '#86939e',
           name: 'clear',
           size: 30,
-          //containerStyle: {marginRight: 10},
         }}
         searchIcon={{
           type: 'material',
           color: '#86939e',
           name: 'menu',
-          disabled: true,
+          disabled: false,
           size: 40,
           onPress: () => { /*props.navigation.toggleDrawer(); */ },
         }}
@@ -73,4 +59,17 @@ const SearchBarHome = () => {
   );
 };
 
+const searchBarStyles = StyleSheet.create({
+  searchBarView: {
+    position: 'absolute',
+    top: '5%',
+    width: '92%',
+    alignSelf: 'center',
+  },
+  container: {
+    borderRadius: 10,
+    borderWidth: 1,
+    backgroundColor: '#FFFFFF',
+  },
+});
 export default SearchBarHome;

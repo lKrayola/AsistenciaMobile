@@ -34,35 +34,23 @@ const OrderReview = ({ route, navigation }: any) => {
 
   return (
     <>
-      <SafeAreaView style={{
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderColor: 'yellow',
-        flex: 1,
-        flexDirection: "column",
-        width: '100%'
-      }}>
+      <SafeAreaView style={orderReviewStyles.global}>
         <View
-          style={{
-            width: '100%',
-            padding: 10,
-            flexDirection: 'row',
-            alignItems: 'flex-start',
-          }}>
-          <View style={{ marginLeft: 10 }}>
+          style={orderReviewStyles.headerView}>
+          <View style={orderReviewStyles.backButtonView}>
             <Icon type="material"
               name="keyboard-backspace"
               size={40}
               onPress={onBackPress}
             />
           </View>
-          <Text style={{ fontSize: 28, alignSelf: 'center', marginHorizontal: 10 }}>
+          <Text style={orderReviewStyles.headerText}>
             Resumen del pedido
           </Text>
         </View>
         <SeparatorModalGrey />
         <ScrollView
-          contentContainerStyle={{ justifyContent: 'space-around', alignItems: "center", flexGrow: 1, width: '100%' }}
+          contentContainerStyle={orderReviewStyles.scrollView}
         >
           <View style={orderReviewStyles.vehicleTypeStyle}>
             <Text
@@ -108,14 +96,14 @@ const OrderReview = ({ route, navigation }: any) => {
           </View>
         </ScrollView>
         <View
-          style={{ justifyContent: "center", paddingVertical: 10, paddingHorizontal: 10 }}
+          style={orderReviewStyles.termTextView}
         >
           <Text
             onPress={onPressTerms}
             style={{ fontSize: 15, textDecorationLine: 'underline' }}
           >
             Al realizar un pedido aceptas nuestros Terminos y Condiciones de uso.
-        </Text>
+          </Text>
         </View>
         <Button
           title='Realizar Pedido'
@@ -133,13 +121,37 @@ const OrderReview = ({ route, navigation }: any) => {
 };
 
 const orderReviewStyles = StyleSheet.create({
+  global: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderColor: 'yellow',
+    flex: 1,
+    flexDirection: "column",
+    width: '100%'
+  },
+  headerView: {
+    width: '100%',
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  backButtonView: { marginLeft: 10 },
+  headerText: {
+    fontSize: 28,
+    alignSelf: 'center',
+    marginHorizontal: 10
+  },
+  scrollView: {
+    justifyContent: 'space-around',
+    alignItems: "center",
+    flexGrow: 1,
+    width: '100%'
+  },
   vehicleTypeStyle: {
     flexDirection: 'row',
     marginTop: 25,
     alignItems: "baseline",
-    //flex: 1,
     padding: 10,
-    //marginHorizontal: 20,
     width: 370,
     height: '10%',
     borderWidth: 2,
@@ -153,12 +165,15 @@ const orderReviewStyles = StyleSheet.create({
     alignItems: "baseline",
     flex: 10,
     padding: 10,
-    //marginHorizontal: 20,
     width: 370,
-    //height: '50%',
     borderWidth: 2,
     borderColor: 'black',
     fontSize: 26,
+  },
+  termTextView: {
+    justifyContent: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 10
   },
   buttonStyle: {
     backgroundColor: '#D13438',

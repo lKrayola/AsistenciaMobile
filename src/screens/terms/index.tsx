@@ -13,6 +13,7 @@ import {
 
 import { Button, Icon } from 'react-native-elements';
 import { termsText } from '../../components/termsText/';
+import { SeparatorModalGrey } from '../../components/separator';
 
 const Terms = ({ navigation }: any) => {
 
@@ -21,14 +22,7 @@ const Terms = ({ navigation }: any) => {
   };
 
   return (
-    <SafeAreaView style={{
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      borderColor: 'yellow',
-      flex: 1,
-      flexDirection: "column",
-      paddingBottom: 10,
-    }}>
+    <SafeAreaView style={termStyles.global}>
       <View
         style={{
           width: '100%',
@@ -36,7 +30,7 @@ const Terms = ({ navigation }: any) => {
           flexDirection: 'row',
           alignItems: 'flex-start',
         }}>
-        <View style={{ marginLeft: 10 }}>
+        <View style={termStyles.headerView}>
           <Icon type="material"
             name="keyboard-backspace"
             size={40}
@@ -44,18 +38,14 @@ const Terms = ({ navigation }: any) => {
             disabled={false}
           />
         </View>
-        <Text style={{ fontSize: 28, alignSelf: 'center', marginHorizontal: 10 }}>
+        <Text style={termStyles.headerText}>
           Terminos y Condiciones
         </Text>
       </View>
+      <SeparatorModalGrey />
       <View style={termStyles.detailStyle}>
         <ScrollView
-          contentContainerStyle={{
-            justifyContent: 'space-around',
-            //alignItems: "center",
-            //borderWidth: 3,
-            flexGrow: 1,
-          }}
+          contentContainerStyle={termStyles.scrollView}
         >
           <Text
             style={{ fontSize: 18 }}
@@ -64,7 +54,7 @@ const Terms = ({ navigation }: any) => {
           </Text>
         </ScrollView>
       </View>
-      <View style={{ justifyContent: "center", alignContent: "center", alignItems: "center" }}>
+      <View style={termStyles.buttonView}>
         <Button
           title='Acepto y he leido los Terminos y Condiciones'
           titleStyle={{ fontSize: 18, alignSelf: "center" }}
@@ -78,19 +68,40 @@ const Terms = ({ navigation }: any) => {
 };
 
 const termStyles = StyleSheet.create({
+  global: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderColor: 'yellow',
+    flex: 1,
+    flexDirection: "column",
+    paddingBottom: 10,
+  },
+  headerView: { marginLeft: 10 },
+  headerText: {
+    fontSize: 28,
+    alignSelf: 'center',
+    marginHorizontal: 10
+  },
   detailStyle: {
     flexDirection: 'row',
-    //marginTop: 25,
     margin: 10,
     alignItems: "baseline",
     flex: 1,
     padding: 10,
-    //marginHorizontal: 20,
     width: '95%',
     height: '100%',
     borderWidth: 2,
     borderColor: 'black',
     fontSize: 26,
+  },
+  scrollView: {
+    justifyContent: 'space-around',
+    flexGrow: 1,
+  },
+  buttonView: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center"
   },
   buttonStyle: {
     backgroundColor: '#D13438',

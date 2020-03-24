@@ -33,59 +33,41 @@ const Power = (props: Props) => {
       estimatedCost: '0.00$',
     };
     props.changeOrderInfo(tempInfo);
-    //props.changeOrderStatus(3);
     props.changeServiceSelected(4);
   };
 
   return (
-    <View style={serviceSelectStyles.sectionContainerModal}>
+    <View style={powerStyles.sectionContainerModal}>
       <View
-        style={{
-          //borderWidth: 2,
-          //borderColor: 'yellow',
-          width: '100%',
-          paddingBottom: 10,
-          flexDirection: 'row',
-          alignItems: 'flex-start',
-        }}>
+        style={powerStyles.headerView}>
         <View style={{ marginLeft: 10 }}>
           <Icon type="material"
             name="keyboard-backspace"
             size={40}
-            //raised={true}
             onPress={undoOrderInfo}
           />
         </View>
-        <Text style={{ fontSize: 25, alignSelf: 'center', marginHorizontal: 10 }}>
+        <Text style={powerStyles.headerText}>
           Pase de Corriente
         </Text>
       </View>
       <SeparatorModalGrey />
-      <View style={{
-        borderColor: 'black',
-        //borderWidth: 1,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        flexDirection: 'column',
-        width: '100%',
-      }}>
+      <View style={powerStyles.body}>
         <Text
           style={{ fontSize: 20 }}
         >Costo estimado: {props.orderInfo.services.combustible.estimatedCost}</Text>
         <Button
           title={'Añadir'}
           titleStyle={{ fontSize: 20 }}
-          buttonStyle={serviceSelectStyles.confirmButton}
+          buttonStyle={powerStyles.confirmButton}
           onPress={onConfirmPress}
         />
       </View>
-
-    </View >
+    </View>
   );
 };
 
-const serviceSelectStyles = StyleSheet.create({
+const powerStyles = StyleSheet.create({
   sectionContainerModal: {
     flexDirection: 'column',
     marginVertical: 10,
@@ -94,13 +76,27 @@ const serviceSelectStyles = StyleSheet.create({
     marginHorizontal: 20,
     width: '100%',
     height: '100%',
-    //borderWidth: 2,
     borderColor: 'blue',
+  },
+  headerView: {
+    width: '100%',
+    paddingBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  headerText: {
+    fontSize: 25, alignSelf: 'center', marginHorizontal: 10
+  },
+  body: {
+    borderColor: 'black',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'column',
+    width: '100%',
   },
   confirmButton: {
     backgroundColor: '#D13438',
-    //FalignItems: "center",
-    //alignSelf: 'flex-end',
     width: 300,
     height: 70,
     borderRadius: 5,

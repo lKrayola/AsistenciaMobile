@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   View,
+  StyleSheet,
 } from 'react-native';
 
 import { check, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
@@ -121,26 +122,22 @@ const Home = ({ navigation }: any) => {
 
   return (
     <>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={homeStyles.global}>
         <Map modalOpen={modalOpen} />
         {orderStatus === OrderStatus.location ? <SearchBarHome /> : null}
-        <View style={{
-          position: 'absolute',
-          top: '7%',
-          alignSelf: 'center',
-          height: '100%',
-        }}>
-          {orderStatus === OrderStatus.location ? <Button
-            title={'Open Modal'}
-            buttonStyle={{
-              backgroundColor: '#FB3640',
-            }}
-            onPress={() => {
-              setModalOpen(true);
-              setOrderStatus(OrderStatus.vehicleType);
-              console.log('pushed open modal button', modalOpen);
-            }}
-          /> : null}
+        <View style={homeStyles.buttonView}>
+          {orderStatus === OrderStatus.location ?
+            <Button
+              title={'Open Modal'}
+              buttonStyle={{
+                backgroundColor: '#FB3640',
+              }}
+              onPress={() => {
+                setModalOpen(true);
+                setOrderStatus(OrderStatus.vehicleType);
+                console.log('pushed open modal button', modalOpen);
+              }}
+            /> : null}
         </View>
         <ModalBottom
           open={modalOpen}
@@ -156,5 +153,17 @@ const Home = ({ navigation }: any) => {
     </>
   );
 };
+
+const homeStyles = StyleSheet.create({
+  global: {
+    flex: 1
+  },
+  buttonView: {
+    position: 'absolute',
+    top: '7%',
+    alignSelf: 'center',
+    height: '100%',
+  },
+});
 
 export default Home;

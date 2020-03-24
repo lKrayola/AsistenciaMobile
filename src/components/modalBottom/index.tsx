@@ -35,11 +35,6 @@ const ModalBottom = (props: Props) => {
 
   useEffect(() => {
     console.log('Service selected', props.orderInfo);
-    //if (props.orderInfo.services.cambioDeLlanta.added ||
-    //  props.orderInfo.services.combustible.added ||
-    //  props.orderInfo.services.paseCorriente.added) {
-    //  setServiceSelected(0);
-    //}
   }, [props.orderInfo]);
 
   useEffect(() => {
@@ -125,9 +120,6 @@ const ModalBottom = (props: Props) => {
           changeOrderStatus={props.changeOrderStatus}
           changeServiceSelected={changeServiceSelected}
         /> : null}
-      {/*props.orderStatus === props.orderStatuses.added ? null : null*/}
-      {props.orderStatus == props.orderStatuses.review ?
-        null : null}
       {props.orderStatus == props.orderStatuses.waiting ?
         <AwaitingArrival
           orderInfo={props.orderInfo}
@@ -145,7 +137,6 @@ const modalStyles = StyleSheet.create({
   modalBase: {
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    //justifyContent: 'center',
     alignItems: 'center',
     height: '50%',
     alignSelf: 'flex-end',
