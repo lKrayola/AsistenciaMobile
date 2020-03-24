@@ -15,6 +15,7 @@ interface Props {
   changeOrderInfo(orderInfo: any): any;
   changeServiceSelected(service: any): any;
   onReviewGoBack(): any;
+  onReviewConfirm(): any;
   navigation: any;
 }
 
@@ -86,6 +87,7 @@ const ServiceSelect = (props: Props) => {
     props.navigation.navigate('OrderReview', {
       onReviewGoBack: props.onReviewGoBack,
       orderInfo: props.orderInfo,
+      onReviewConfirm: props.onReviewConfirm,
     });
   };
 
@@ -111,7 +113,6 @@ const ServiceSelect = (props: Props) => {
         } else {
           return false;
         }
-      //default:
     }
   };
 
@@ -126,9 +127,9 @@ const ServiceSelect = (props: Props) => {
           disabled={item.disabled}
         />
         {(!item.disabled && checkItemAdd(item.id)) ? <Badge value={checkItemAdd(item.id) + ' '}
-          containerStyle={{ position: 'absolute', top: '78%', right: '15%', flexGrow: 1 }}
-          badgeStyle={{ backgroundColor: 'white', borderRadius: 2, width: '100%' }}
-          textStyle={{ color: item.color, fontWeight: 'bold' }}
+          containerStyle={serviceSelectStyles.badgeContainer}
+          badgeStyle={serviceSelectStyles.badge}
+          textStyle={[serviceSelectStyles.badgeText, { color: item.color }]}
         /> : null}
       </View>
     );
@@ -137,29 +138,21 @@ const ServiceSelect = (props: Props) => {
   return (
     <View style={serviceSelectStyles.sectionContainerModal}>
       <View
-        style={{
-          //borderWidth: 2,
-          //borderColor: 'yellow',
-          width: '100%',
-          paddingBottom: 10,
-          flexDirection: 'row',
-          alignItems: 'flex-start',
-        }}>
+        style={serviceSelectStyles.headerView}>
         <View style={{ marginLeft: 10 }}>
           <Icon type="material"
             name="keyboard-backspace"
             size={40}
-            //raised={true}
             onPress={undoOrderInfo}
           />
         </View>
-        <Text style={{ fontSize: 25, alignSelf: 'center', marginHorizontal: 10 }}>
+        <Text style={serviceSelectStyles.headerText}>
           Servicios
         </Text>
         {(props.orderInfo.services.cambioDeLlanta.added ||
           props.orderInfo.services.combustible.added ||
           props.orderInfo.services.paseCorriente.added) ?
-          <Button title="Confirmar" buttonStyle={{ backgroundColor: '#D13438', alignSelf: 'flex-end' }}
+          <Button title="Confirmar" buttonStyle={serviceSelectStyles.confirmButton}
             onPress={onPressConfirm}
           />
           :
@@ -195,18 +188,30 @@ const serviceSelectStyles = StyleSheet.create({
     marginHorizontal: 20,
     width: '100%',
     height: '100%',
-    //borderWidth: 2,
     borderColor: 'blue',
+  },
+  headerView: {
+    width: '100%',
+    paddingBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  headerText: {
+    fontSize: 25,
+    alignSelf: 'center',
+    marginHorizontal: 10
+  },
+  confirmButton: {
+    backgroundColor: '#D13438',
+    alignSelf: 'flex-end'
   },
   flatlistContainerModal: {
     flexDirection: 'column',
     marginVertical: 1,
     alignItems: 'center',
     flex: 1,
-    //marginHorizontal: 20,
     width: '100%',
     height: '100%',
-    //borderWidth: 3,
     borderColor: 'black',
   },
   buttonLlanta: {
@@ -236,10 +241,21 @@ const serviceSelectStyles = StyleSheet.create({
   row: {
     flex: 1,
     justifyContent: 'space-around',
-    //width: '85%',
-    //height: 80,
-    //borderWidth: 3,
     borderColor: 'purple',
+  },
+  badge: {
+    backgroundColor: 'white',
+    borderRadius: 2,
+    width: '100%'
+  },
+  badgeContainer: {
+    position: 'absolute',
+    top: '78%',
+    right: '15%',
+    flexGrow: 1
+  },
+  badgeText: {
+    fontWeight: 'bold'
   },
 });
 

@@ -9,6 +9,7 @@ import ServiceSelect from '../../screens/modal/serviceSelect';
 import Tire from '../../screens/modal/services/tire';
 import Gas from '../../screens/modal/services/gas';
 import Power from '../../screens/modal/services/power';
+import AwaitingArrival from '../../screens/modal/awaitingArrival';
 
 interface Props {
   open: boolean;
@@ -34,11 +35,6 @@ const ModalBottom = (props: Props) => {
 
   useEffect(() => {
     console.log('Service selected', props.orderInfo);
-    //if (props.orderInfo.services.cambioDeLlanta.added ||
-    //  props.orderInfo.services.combustible.added ||
-    //  props.orderInfo.services.paseCorriente.added) {
-    //  setServiceSelected(0);
-    //}
   }, [props.orderInfo]);
 
   useEffect(() => {
@@ -60,6 +56,11 @@ const ModalBottom = (props: Props) => {
   const onReviewGoBack = () => {
     setModalOpen(true);
     props.changeOrderStatus(2);
+  };
+
+  const onReviewConfirm = () => {
+    setModalOpen(true);
+    props.changeOrderStatus(4);
   };
 
   return (
@@ -91,6 +92,7 @@ const ModalBottom = (props: Props) => {
           changeOrderInfo={props.changeOrderInfo}
           changeServiceSelected={changeServiceSelected}
           onReviewGoBack={onReviewGoBack}
+          onReviewConfirm={onReviewConfirm}
           orderStatus={props.orderStatus}
           navigation={props.navigation}
         /> : null}
@@ -118,9 +120,13 @@ const ModalBottom = (props: Props) => {
           changeOrderStatus={props.changeOrderStatus}
           changeServiceSelected={changeServiceSelected}
         /> : null}
-      {/*props.orderStatus === props.orderStatuses.added ? null : null*/}
-      {props.orderStatus == props.orderStatuses.review ? null : null}
-      {props.orderStatus == props.orderStatuses.waiting ? null : null}
+      {props.orderStatus == props.orderStatuses.waiting ?
+        <AwaitingArrival
+          orderInfo={props.orderInfo}
+          changeOrderStatus={props.changeOrderStatus}
+          changeOrderInfo={props.changeOrderInfo}
+          onModalClosed={props.onModalClosed}
+        /> : null}
       {props.orderStatus == props.orderStatuses.completed ? null : null}
       {props.orderStatus == props.orderStatuses.canceled ? null : null}
     </Modal>
@@ -131,7 +137,6 @@ const modalStyles = StyleSheet.create({
   modalBase: {
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    //justifyContent: 'center',
     alignItems: 'center',
     height: '50%',
     alignSelf: 'flex-end',

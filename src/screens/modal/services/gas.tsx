@@ -46,65 +46,32 @@ const Gas = (props: Props) => {
       estimatedCost: '0.00$',
     };
     props.changeOrderInfo(tempInfo);
-    //props.changeOrderStatus(3);
     props.changeServiceSelected(4);
   };
 
-  const modalButtons = [
-    {
-      title: 'Confirmar',
-      //style: serviceSelectStyles.buttonLlanta,
-      onPress: () => {
-        let tempInfo = props.orderInfo;
-        tempInfo.services.combustible.added = true;
-        props.changeOrderInfo(tempInfo);
-      },
-    },
-  ];
-
   return (
-    <View style={serviceSelectStyles.sectionContainerModal}>
+    <View style={gasServiceStyle.sectionContainerModal}>
       <View
-        style={{
-          //borderWidth: 2,
-          //borderColor: 'yellow',
-          width: '100%',
-          paddingBottom: 10,
-          flexDirection: 'row',
-          alignItems: 'flex-start',
-        }}>
-        <View style={{ marginLeft: 10 }}>
+        style={gasServiceStyle.headerView}>
+        <View style={gasServiceStyle.backButton}>
           <Icon type="material"
             name="keyboard-backspace"
             size={40}
-            //raised={true}
             onPress={undoOrderInfo}
           />
         </View>
-        <Text style={{
-          fontSize: 25,
-          alignSelf: 'center',
-          marginHorizontal: 10,
-        }}>
+        <Text style={gasServiceStyle.headerText}>
           Combustible  -  1 Galón
         </Text>
       </View>
       <SeparatorModalGrey />
-      <View style={{
-        borderColor: 'black',
-        //borderWidth: 1,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        flexDirection: 'column',
-        width: '100%',
-      }}>
+      <View style={gasServiceStyle.body}>
         <ButtonGroup
           onPress={setGroupButtonIndex}
           selectedIndex={groupButtonIndex}
           buttons={groupButton}
-          containerStyle={[{ height: 60 }]}
-          selectedButtonStyle={[serviceSelectStyles.confirmButton, {
+          containerStyle={{ height: 60 }}
+          selectedButtonStyle={[gasServiceStyle.confirmButton, {
             borderRadius: 0,
             width: '100%',
           }]}
@@ -116,7 +83,7 @@ const Gas = (props: Props) => {
         <Button
           title={'Añadir'}
           titleStyle={{ fontSize: 20 }}
-          buttonStyle={serviceSelectStyles.confirmButton}
+          buttonStyle={gasServiceStyle.confirmButton}
           onPress={onConfirmPress}
           disabled={groupButtonIndex !== -1 ? false : true}
         />
@@ -125,7 +92,7 @@ const Gas = (props: Props) => {
   );
 };
 
-const serviceSelectStyles = StyleSheet.create({
+const gasServiceStyle = StyleSheet.create({
   sectionContainerModal: {
     flexDirection: 'column',
     marginVertical: 10,
@@ -134,13 +101,31 @@ const serviceSelectStyles = StyleSheet.create({
     marginHorizontal: 20,
     width: '100%',
     height: '100%',
-    //borderWidth: 2,
     borderColor: 'blue',
+  },
+  headerView: {
+    width: '100%',
+    paddingBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  backButton: {
+    marginLeft: 10
+  },
+  headerText: {
+    fontSize: 25,
+    alignSelf: 'center',
+    marginHorizontal: 10,
+  },
+  body: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'column',
+    width: '100%',
   },
   confirmButton: {
     backgroundColor: '#D13438',
-    //FalignItems: "center",
-    //alignSelf: 'flex-end',
     width: 300,
     height: 70,
     borderRadius: 5,
