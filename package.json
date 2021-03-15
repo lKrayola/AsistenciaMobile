@@ -20,7 +20,7 @@
     "@types/react-native-modalbox": "^1.4.8",
     "@types/react-test-renderer": "^16.9.2",
     "react": "16.9.0",
-    "react-native": "0.61.5",
+    "react-native": "0.62.0",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-maps": "0.26.1",
